@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:viewModel="clr-namespace:NutritionDiary_app.ViewModels"
+    xmlns:control="clr-namespace:NutritionDiary_app.Controls" xmlns:control1="clr-namespace:NutritionDiary_app.AppLayout.Controls"
+    x:Class="NutritionDiary_app.AppLayout.Views.AddMealInDb"
+    NavigationPage.HasNavigationBar="False">
+<ContentPage.Resources>
+    <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="Styles.xaml" />
+        </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+</ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <viewModel:AddMealInDbViewModel/>
+    </ContentPage.BindingContext>
+<ContentPage.Content>
+    <ScrollView>
+    <StackLayout Padding="16" Spacing="16" BackgroundColor="{StaticResource Gray-White}">
+
+            <Button Text = "Back" Clicked="Back_Clicked"
+                CornerRadius="4"
+                HeightRequest="40"
+                WidthRequest="55"
+                HorizontalOptions="Start" VerticalOptions="Start"
+                BackgroundColor="Transparent"
+                FontFamily="Montserrat-SemiBold"
+                FontSize="12"
+                TextColor="{DynamicResource PrimaryDarkColor}"/>
+
+             <border:SfBorder 
+                    BorderColor="{StaticResource Gray-White}"
+                    Style="{StaticResource SfBorderStyle}">
+                    <control:BorderlessEntry
+                        x:Name="MealNameEntry"
+                        Text="{Binding MealName}"
+                        TextColor="{DynamicResource Gray-900}"
+                        Placeholder="Название"
+                        PlaceholderColor="{DynamicResource Gray-700}"
+                        Style="{StaticResource EntryStyle}"
+                        FontSize="22"/>
+                </border:SfBorder>
+
+                <SearchBar x:Name="searchBar"
+                            TextChanged="SearchBar_TextChanged"
+                            Placeholder="Поиск продукта"
+                            FontSize="17"
+                            FontFamily="Montserrat-Regular"
+                            WidthRequest="600"
+                            HeightRequest="40"
+                            VerticalOptions="Center"/>
+
+
+                <ListView x:Name="searchResults"
+                          ItemSelected="searchResults_ItemSelected"
+                          HasUnevenRows="True"
+                          SeparatorColor="{DynamicResource PrimaryColor}"
+                          IsVisible="false">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <control1:ExtendedViewCell SelectedBackgroundColor="Pink">
+                                <ViewCell.View>
+                                    <StackLayout Padding="10" Orientation="Horizontal">
+                                        <Label Text="{Binding FoodName}"
+                                                FontSize="16"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="Start"/>
+                                        <Label Text="{Binding Calories, StringFormat='{0:f0} kcal'}"
+                                                FontSize="14"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="End"
+                                                TextColor="{DynamicResource PrimaryDarkColor}"/>
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </control1:ExtendedViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                
+                    <CollectionView x:Name="FoodsList" IsVisible="false" ItemsSource="{Binding Foods}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="10,0,0,0" Spacing="15" Margin="5">
+                                <Grid>
+                                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" 
+                                        Text="{Binding FoodName}"
+                                        FontSize="17"
+                                        WidthRequest="180"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Start"
+                                        FontFamily="Montserrat-Regular"
+                                        TextColor="{DynamicResource Gray-700}"/>
+                                    <control:BorderlessEntry Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="3"
+                                        FontSize="17"
+                                        FontFamily="Montserrat-Regular"
+                                        Text="{Binding Weight}"
+                                        TextColor="{DynamicResource Gray-900}"
+                                        WidthRequest="40"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Start"
+                                        Keyboard="Numeric"/>
+                                     <Label Grid.Row="0" Grid.Column="5"
+                                        FontSize="17"
+                                        FontFamily="Montserrat-Regular"
+                                        Text="г"
+                                        TextColor="{DynamicResource Gray-900}"
+                                        WidthRequest="40"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Start"/>
+                                    <Button Grid.Row="0" Grid.Column="6"
+                                        x:Name="delete_button"
+                                        Margin="0,0,10,0"
+                                        WidthRequest="50"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        Text="╳"
+                                        Clicked="Delete_Clicked"
+                                        BackgroundColor="{DynamicResource Gray-White}"
+                                        FontSize="18"
+                                        FontFamily="Montserrat-Regular"
+                                        TextColor="{DynamicResource Gray-700}"/>
+                                </Grid>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                
+
+                <buttons:SfButton
+                    Margin="0,16,0,0"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource SfButtonStyle}"
+                    Text="ДОБАВИТЬ"
+                    Clicked="Add_Clicked"
+                    Command="{Binding AddCommand}"
+                    WidthRequest="200" />
+
+    </StackLayout>
+    </ScrollView>
+</ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,97 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <NoStdLib>true</NoStdLib>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <NoStdLib>true</NoStdLib>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+    <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
+    <PackageReference Include="SkiaSharp.Extended" Version="1.60.0" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.2" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="19.1.0.64" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPicker" Version="19.1.0.64" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="19.1.0.64" />
+    <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="19.1.0.64" />
+    <PackageReference Include="Syncfusion.Xamarin.SfRotator" Version="19.1.0.64" />
+    <PackageReference Include="Syncfusion.Xamarin.Expander" Version="19.1.0.64" />
+    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="19.1.0.64" />
+    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="19.1.0.64" />
+    <PackageReference Include="Syncfusion.Xamarin.SfProgressBar" Version="19.1.0.64" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="19.1.0.64" />
+    <PackageReference Include="Syncfusion.Xamarin.DataSource" Version="19.1.0.64" />
+    <PackageReference Include="Syncfusion.Xamarin.GridCommon" Version="19.1.0.64" />
+    <PackageReference Include="Syncfusion.Xamarin.SfBadgeView" Version="19.1.0.64" />
+    <PackageReference Include="Syncfusion.Xamarin.SfGauge" Version="19.1.0.64" />
+    <PackageReference Include="Syncfusion.Xamarin.SfParallaxView" Version="19.1.0.64" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="19.1.0.64" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="19.1.0.64" />
+    <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="19.1.0.64" />
+    <PackageReference Include="Syncfusion.Xamarin.Cards" Version="19.1.0.64" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="LessJie.System.Web.Http" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AppLayout\Controls\" />
+    <Folder Include="AppLayout\Views\" />
+    <Folder Include="Behaviors\" />
+    <Folder Include="Controls\" />
+    <Folder Include="Converters\" />
+    <Folder Include="Models\" />
+    <Folder Include="Models\Catalog" />
+    <Folder Include="Models\Detail" />
+    <Folder Include="Models\Navigation" />
+    <Folder Include="Themes\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="ViewModels\Forms" />
+    <Folder Include="Views\" />
+    <Folder Include="Views\Forms\" />
+    <Folder Include="Services\" />
+    <Folder Include="Helpers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="AppLayout\Views\OverviewPage.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="AppLayout\Views\Styles.xaml.cs">
+        <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+         <Compile Update="Views\Forms\Styles.xaml.cs">
+        <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Themes\LightTheme.xaml.cs">
+      <DependentUpon>LightTheme.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Forms\AddProfilePage.xaml.cs">
+      <DependentUpon>AddProfilePage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+ <!-- <ItemGroup>--> 
+   <!-- <Reference Include="Xamarin.iOS">
+      <HintPath>..\..\..\..\..\Library\Frameworks\Xamarin.iOS.framework\Versions\14.8.0.3\lib\mono\Xamarin.iOS\Xamarin.iOS.dll</HintPath>
+    </Reference>-->
+  <!-- <Reference Include="mscorlib">
+     <HintPath>..\NutritionDiary_app.iOS\obj\iPhoneSimulator\Debug\mtouch-cache\2-PreBuild\mscorlib.dll</HintPath>
+   </Reference>
+   <Reference Include="Xamarin.iOS">
+     <HintPath>..\NutritionDiary_app.iOS\obj\iPhoneSimulator\Debug\mtouch-cache\2-PreBuild\Xamarin.iOS.dll</HintPath>
+   </Reference>
+  </ItemGroup>-->
+  <ItemGroup>
+    <EmbeddedResource Remove="AppLayout\Views\OverviewPage.xaml" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="NutritionDiary_app.Views.Forms.AddProfilePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:converter="clr-namespace:NutritionDiary_app.Converters"
+    xmlns:control="clr-namespace:NutritionDiary_app.Controls"
+    Title="Создать профиль"
+    BackgroundColor="{DynamicResource Gray-White}"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+   
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="16" Spacing="16">
+
+                <Label x:Name="Token_lbl" FontSize="16"
+                       HorizontalOptions="Center"
+                       TextColor="{DynamicResource Gray-900}"
+                       IsVisible="False"/>
+
+                <!--  Gender radiobutton  -->
+                <buttons:SfRadioGroup Orientation="Horizontal" x:Name="GenderGroup">
+                    <buttons:SfRadioButton
+                        Margin="8,12,8,2"
+                        HorizontalOptions="FillAndExpand"
+                        Style="{StaticResource SfRadioButtonStyle}"
+                        BackgroundColor="Transparent"
+                        CheckedColor="{DynamicResource PrimaryColor}"
+                        UncheckedColor="{DynamicResource Gray-300}"
+                        VerticalOptions="Center"
+                        x:Name="female"
+                        Text="Женщина"
+                        FontSize="16"/>
+                    <buttons:SfRadioButton
+                        Margin="8,12,8,2"
+                        HorizontalOptions="FillAndExpand"
+                        Style="{StaticResource SfRadioButtonStyle}"
+                        BackgroundColor="Transparent"
+                        CheckedColor="{DynamicResource PrimaryColor}"
+                        UncheckedColor="{DynamicResource Gray-300}"
+                        VerticalOptions="Center"
+                        x:Name="male"
+                        Text="Мужчина"
+                        FontSize="16"/>
+                </buttons:SfRadioGroup>
+
+                <!--Age entry with border-->
+                <border:SfBorder
+                    BorderColor="{Binding Source={x:Reference AgeEntry}, Path=IsFocused,
+                    Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                    Style="{StaticResource SfBorderStyle}">
+                    <control:BorderlessEntry
+                        x:Name="AgeEntry"
+                        TextColor="{DynamicResource Gray-900}"
+                        Placeholder="Возраст"
+                        PlaceholderColor="{DynamicResource Gray-700}"
+                        Keyboard="Numeric"
+                        Style="{StaticResource EntryStyle}"
+                        FontSize="16"/>
+                </border:SfBorder>
+
+                   <!--Weight entry with border-->  
+                <border:SfBorder
+                    BorderColor="{Binding Source={x:Reference WeightEntry}, Path=IsFocused,
+                    Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                    Style="{StaticResource SfBorderStyle}">
+                    <control:BorderlessEntry
+                        x:Name="WeightEntry"
+                        TextColor="{DynamicResource Gray-900}"
+                        Placeholder="Вес (кг)"
+                        PlaceholderColor="{DynamicResource Gray-700}"
+                        Keyboard="Numeric"
+                        Style="{StaticResource EntryStyle}"
+                        FontSize="16"/>
+                </border:SfBorder>
+
+                   <!--Height entry with border-->  
+                <border:SfBorder
+                    BorderColor="{Binding Source={x:Reference HeightEntry}, Path=IsFocused,
+                    Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                    Style="{StaticResource SfBorderStyle}">
+                    <control:BorderlessEntry
+                        x:Name="HeightEntry"
+                        TextColor="{DynamicResource Gray-900}"
+                        Placeholder="Рост (см)"
+                        PlaceholderColor="{DynamicResource Gray-700}"
+                        Keyboard="Numeric"
+                        Style="{StaticResource EntryStyle}"
+                        FontSize="16"/>
+                </border:SfBorder>
+
+                
+                 <!--Activity Picker-->
+                <Picker x:Name="ActivitiesPicker"
+                    SelectedIndexChanged="ActivitiesPicker_SelectedIndexChanged"
+                    Title="Уровень активности"
+                    TitleColor="{StaticResource Gray-700}"
+                    TextColor="{StaticResource Gray-900}"
+                    FontSize="16"
+                    FontFamily="Montserrat-Regular"
+                    VerticalTextAlignment="Center"/>
+
+                  <!--Goal radiobutton--> 
+                <buttons:SfRadioGroup Orientation="Vertical" x:Name="GoalGroup" >
+                    <buttons:SfRadioButton
+                            Margin="8,12,8,2"
+                            HorizontalOptions="FillAndExpand"
+                            Style="{StaticResource SfRadioButtonStyle}"
+                            BackgroundColor="Transparent"
+                            CheckedColor="{DynamicResource PrimaryColor}"
+                            UncheckedColor="{DynamicResource Gray-300}"
+                            VerticalOptions="Center"
+                            x:Name="firstGoal"
+                            Text="Сбросить вес"
+                            FontSize="16"/>
+                     <buttons:SfRadioButton
+                            Margin="8,12,8,2"
+                            HorizontalOptions="FillAndExpand"
+                            Style="{StaticResource SfRadioButtonStyle}"
+                            BackgroundColor="Transparent"
+                            CheckedColor="{DynamicResource PrimaryColor}"
+                            UncheckedColor="{DynamicResource Gray-300}"
+                            VerticalOptions="Center"
+                            x:Name="secondGoal"
+                            Text="Удержать вес"
+                            FontSize="16"/>
+                     <buttons:SfRadioButton
+                            Margin="8,12,8,2"
+                            HorizontalOptions="FillAndExpand"
+                            Style="{StaticResource SfRadioButtonStyle}"
+                            BackgroundColor="Transparent"
+                            CheckedColor="{DynamicResource PrimaryColor}"
+                            UncheckedColor="{DynamicResource Gray-300}"
+                            VerticalOptions="Center"
+                            x:Name="thirdGoal"
+                            Text="Набрать вес"
+                            FontSize="16"/>
+                </buttons:SfRadioGroup>
+
+                <buttons:SfButton
+                    Margin="0,16,0,0"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource SfButtonStyle}"
+                    Text="ДАЛЕЕ"
+                    Clicked="Next_Clicked"
+                    WidthRequest="200" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

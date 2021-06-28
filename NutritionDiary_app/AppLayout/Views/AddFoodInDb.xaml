@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converter="clr-namespace:NutritionDiary_app.Converters"
+    xmlns:viewModel="clr-namespace:NutritionDiary_app.ViewModels"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:control="clr-namespace:NutritionDiary_app.Controls"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    x:Class="NutritionDiary_app.AppLayout.Views.AddFoodInDb"
+    Title="Добавить новый продукт в базу данных"
+    BackgroundColor="{DynamicResource Gray-White}"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <viewModel:AddFoodInDbViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+            <StackLayout Padding="10" Spacing="40">
+
+            <Grid>
+            <Button Text = "Back" Clicked="Back_Clicked"
+                CornerRadius="4"
+                HeightRequest="40"
+                WidthRequest="55"
+                HorizontalOptions="Start" VerticalOptions="Start"
+                BackgroundColor="Transparent"
+                FontFamily="Montserrat-SemiBold"
+                FontSize="12"
+                TextColor="{DynamicResource PrimaryDarkColor}"
+                Grid.Row="0" Grid.Column="0"/>
+            
+             
+             <border:SfBorder Grid.Row="1" Grid.Column="0"
+                    BorderColor="{Binding Source={x:Reference FoodNameEntry}, Path=IsFocused,
+                    Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                    Style="{StaticResource SfBorderStyle}">
+                    <control:BorderlessEntry
+                        x:Name="FoodNameEntry"
+                        Text="{Binding FoodName}"
+                        TextColor="{DynamicResource Gray-900}"
+                        Placeholder="Название"
+                        PlaceholderColor="{DynamicResource Gray-700}"
+                        Style="{StaticResource EntryStyle}"
+                        FontSize="20"/>
+            </border:SfBorder>
+
+            </Grid>
+                <StackLayout Padding="10" Spacing="20">
+                <Grid RowSpacing="40" ColumnSpacing="20" ColumnDefinitions="Auto, Auto, Auto" RowDefinitions="40,40,40,40,50,55" HorizontalOptions="Center">
+
+                <Label Grid.Row="0" Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       Margin="0" 
+                    FontSize="18" 
+                    TextColor="{StaticResource Gray-900}" 
+                    Style="{StaticResource LabelStyle}"  
+                    Text= "Калорий"/>
+                <border:SfBorder
+                    Grid.Row="0" Grid.Column="1"
+                    BorderColor="{Binding Source={x:Reference CaloriesEntry}, Path=IsFocused,
+                    Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                    Style="{StaticResource SfSquareBorderStyle}">
+                    <control:BorderlessEntry
+                        x:Name="CaloriesEntry"
+                        Text="{Binding Calories}"
+                        TextColor="{DynamicResource Gray-900}"
+                        PlaceholderColor="{DynamicResource Gray-700}"
+                        Keyboard="Numeric"
+                        FontSize="18" 
+                        Style="{StaticResource SquareEntryStyle}"/>
+                </border:SfBorder>
+                 <Label Grid.Row="0" Grid.Column="2"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        Margin="0" 
+                    FontSize="18" 
+                    TextColor="{StaticResource Gray-900}" 
+                    Style="{StaticResource LabelStyle}"
+                    Text= " / 100 г "/>
+
+
+                <Label Grid.Row="1" Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       Margin="0" 
+                    FontSize="18" 
+                    TextColor="{StaticResource Gray-900}" 
+                    Style="{StaticResource LabelStyle}"
+                    Text= "Белков"/>
+                <border:SfBorder
+                    Grid.Row="1" Grid.Column="1"
+                    BorderColor="{Binding Source={x:Reference ProteinsEntry}, Path=IsFocused,
+                    Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                    Style="{StaticResource SfSquareBorderStyle}">
+                    <control:BorderlessEntry
+                        x:Name="ProteinsEntry"
+                        Text="{Binding Proteins}"
+                        TextColor="{DynamicResource Gray-900}"
+                        PlaceholderColor="{DynamicResource Gray-700}"
+                        Keyboard="Numeric"
+                        FontSize="18" 
+                        Style="{StaticResource SquareEntryStyle}"/>
+                </border:SfBorder>
+                <Label Grid.Row="1" Grid.Column="2"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                    Margin="0" 
+                    FontSize="18" 
+                    TextColor="{StaticResource Gray-900}" 
+                    Style="{StaticResource LabelStyle}"
+                    Text= " / 100 г "/>
+
+
+                <Label Margin="0"
+                       Grid.Row="2" Grid.Column="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                    FontSize="18" 
+                    TextColor="{StaticResource Gray-900}" 
+                    Style="{StaticResource LabelStyle}" 
+                    Text= "Жиров"/>
+                <border:SfBorder
+                    Grid.Row="2" Grid.Column="1"
+                    BorderColor="{Binding Source={x:Reference FatsEntry}, Path=IsFocused,
+                    Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                    Style="{StaticResource SfSquareBorderStyle}">
+                    <control:BorderlessEntry
+                        x:Name="FatsEntry"
+                        Text="{Binding Fats}"
+                        TextColor="{DynamicResource Gray-900}"
+                        PlaceholderColor="{DynamicResource Gray-700}"
+                        Keyboard="Numeric"
+                        FontSize="18" 
+                        Style="{StaticResource SquareEntryStyle}"/>
+                </border:SfBorder>
+                <Label
+                    Grid.Row="2" Grid.Column="2"
+                    Margin="0"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"
+                    FontSize="18" 
+                    TextColor="{StaticResource Gray-900}" 
+                    Style="{StaticResource LabelStyle}"
+                    Text= " / 100 г "/>
+
+
+
+                <Label Grid.Row="3" Grid.Column="0"
+                       Margin="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                    FontSize="18" 
+                    TextColor="{StaticResource Gray-900}" 
+                    Style="{StaticResource LabelStyle}"
+                    Text= "Углеводов"/>
+                <border:SfBorder
+                    Grid.Row="3" Grid.Column="1"
+                    BorderColor="{Binding Source={x:Reference CarbsEntry}, Path=IsFocused,
+                    Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                    Style="{StaticResource SfSquareBorderStyle}">
+                    <control:BorderlessEntry
+                        x:Name="CarbsEntry"
+                        Text="{Binding Carbs}"
+                        TextColor="{DynamicResource Gray-900}"
+                        PlaceholderColor="{DynamicResource Gray-700}"
+                        Keyboard="Numeric"
+                        FontSize="18" 
+                        Style="{StaticResource SquareEntryStyle}"/>
+                </border:SfBorder>
+                <Label Grid.Row="3" Grid.Column="2"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                    Margin="0" 
+                    FontSize="18" 
+                    TextColor="{StaticResource Gray-900}" 
+                    Style="{StaticResource LabelStyle}"  
+                    Text= " / 100 г "/>
+
+
+                <buttons:SfButton Grid.Row="5" Grid.ColumnSpan="3"
+                    Margin="0,16,0,0"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource SfButtonStyle}"
+                    Text="ДОБАВИТЬ"
+                    Command="{Binding AddCommand}"
+                    Clicked="Add_Clicked"
+                    WidthRequest="200" />
+                     </Grid>
+
+                 </StackLayout>
+                </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

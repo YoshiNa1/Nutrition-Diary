@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converter="clr-namespace:NutritionDiary_app.Converters"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:control="clr-namespace:NutritionDiary_app.Controls"
+    xmlns:viewModel="clr-namespace:NutritionDiary_app.ViewModels"
+    x:Class="NutritionDiary_app.AppLayout.Views.PutMealInRation"
+    Title="Добавить новое блюдо в рацион"
+    BackgroundColor="{DynamicResource Gray-White}"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <!--<ContentPage.BindingContext>
+        <viewModel:PutMealInRationViewModel/>
+    </ContentPage.BindingContext>-->
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="0">
+
+                <Grid>
+                <Button Grid.Row="0" Grid.Column="0"
+                    Text = "Back" Clicked="Back_Clicked"
+                    CornerRadius="4"
+                    HeightRequest="40"
+                    WidthRequest="55"
+                    HorizontalOptions="Start" VerticalOptions="Start"
+                    BackgroundColor="Transparent"
+                    FontFamily="Montserrat-SemiBold"
+                    FontSize="12"
+                    TextColor="{DynamicResource PrimaryDarkColor}"/>
+
+                <Button Grid.Row="0" Grid.Column="1"
+                    Text = "Удалить блюдо" Clicked="DeleteMeal_Clicked"
+                    CornerRadius="4"
+                    HeightRequest="40"
+                    WidthRequest="180"
+                    HorizontalOptions="End" VerticalOptions="Start"
+                    BackgroundColor="Transparent"
+                    FontFamily="Montserrat-SemiBold"
+                    FontSize="12"
+                    TextColor="{DynamicResource Gray-700}"/>
+                </Grid>
+
+                <Grid RowSpacing="20" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="95"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="95" />
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="45" />
+                    </Grid.RowDefinitions>
+
+                    <Frame Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                        BackgroundColor="{DynamicResource Gray-White}"
+                        CornerRadius="20" Padding="20">
+                        <Button
+                            x:Name="MealName_lbl"
+                            TextColor="{DynamicResource Gray-900}"
+                            Style="{StaticResource EntryStyle}"
+                            FontSize="16"
+                            FontFamily="Montserrat-SemiBold"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Start"
+                            HeightRequest="100"
+                            Clicked="MealName_Clicked">
+                        </Button>
+                    </Frame>
+
+                    <border:SfBorder
+                        Grid.Row="1" Grid.Column="0"
+                        BorderColor="{Binding Source={x:Reference WeightEntry}, Path=IsFocused,
+                        Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource SfSquareBorderStyle}"
+                        HeightRequest="10"
+                        WidthRequest="50">
+                        <control:BorderlessEntry
+                            x:Name="WeightEntry"
+                            FontFamily="Montserrat-SemiBold"
+                            TextColor="{DynamicResource Gray-900}"
+                            PlaceholderColor="{DynamicResource Gray-900}"
+                            FontSize="17"
+                            Keyboard="Numeric"
+                            Style="{StaticResource SquareEntryStyle}" />
+                    </border:SfBorder>
+                    <Label Grid.Row="1" Grid.Column="1"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        Margin="0" 
+                        FontSize="16"
+                        FontFamily="Montserrat-Regular"
+                        TextColor="{StaticResource Gray-700}" 
+                        Style="{StaticResource LabelStyle}"
+                        Text= " г "/>
+
+                    <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        Margin="0" 
+                        FontSize="20"
+                        FontFamily="Montserrat-Regular"
+                        TextColor="{StaticResource Gray-700}" 
+                        Style="{StaticResource LabelStyle}"
+                        Text= " Состав блюда "/>
+                    <Button Grid.Row="2" Grid.Column="1"
+                        x:Name="edit_button"
+                        Margin="0,0,10,0"
+                        WidthRequest="45"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Text="✎"
+                        Clicked="Edit_Clicked"
+                        BackgroundColor="Transparent"
+                        FontSize="20"
+                        FontFamily="Montserrat-Regular"
+                        TextColor="{DynamicResource Gray-700}"/>
+                    </Grid>
+
+                    <control:CustomShadowFrame x:Name="FoodsList_Frame" CornerRadius="20" BorderWidth="2" Margin="0,0,0,40">
+                    <CollectionView x:Name="FoodsList" IsVisible="true">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="10,0,0,0" Spacing="15" Margin="5">
+                                <Grid ColumnDefinitions="240, 30, Auto" RowDefinitions="40">
+                                    <Label Grid.Row="0" Grid.Column="0"
+                                        Text="{Binding FoodName}"
+                                        FontSize="17"
+                                        WidthRequest="180"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Start"
+                                        FontFamily="Montserrat-Regular"
+                                        TextColor="{DynamicResource Gray-700}"/>
+                                    <Label Grid.Row="0" Grid.Column="1"
+                                        FontSize="17"
+                                        FontFamily="Montserrat-Regular"
+                                        Text="{Binding Weight}"
+                                        TextColor="{DynamicResource Gray-900}"
+                                        WidthRequest="40"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Start"/>
+                                     <Label Grid.Row="0" Grid.Column="2"
+                                        FontSize="17"
+                                        FontFamily="Montserrat-Regular"
+                                        Text="г"
+                                        TextColor="{DynamicResource Gray-900}"
+                                        WidthRequest="40"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Start"/>
+                                </Grid>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    </control:CustomShadowFrame>
+
+                    <control:CustomShadowFrame x:Name="EditMealList_Frame" IsVisible="false" CornerRadius="20" BorderWidth="2">
+                    <CollectionView x:Name="EditMeal_List" IsVisible="false">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Padding="10,0,0,0" Spacing="15" Margin="5">
+                                    <Grid ColumnDefinitions="210, 45, 15, 50" RowDefinitions="40">
+                                        <Label Grid.Row="0" Grid.Column="0"
+                                            Text="{Binding FoodName}"
+                                            FontSize="17"
+                                            WidthRequest="180"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Start"
+                                            FontFamily="Montserrat-Regular"
+                                            TextColor="{DynamicResource Gray-700}"/>
+                                        <Entry Grid.Row="0" Grid.Column="1"
+                                            FontSize="17"
+                                            FontFamily="Montserrat-Regular"
+                                            Text="{Binding Weight}"
+                                            TextColor="{DynamicResource Gray-900}"
+                                            WidthRequest="40"
+                                            Keyboard="Numeric"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Start"/>
+                                         <Label Grid.Row="0" Grid.Column="2"
+                                            FontSize="17"
+                                            FontFamily="Montserrat-Regular"
+                                            Text="г"
+                                            TextColor="{DynamicResource Gray-900}"
+                                            WidthRequest="40"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Start"/>
+                                        <Button Grid.Row="0" Grid.Column="3"
+                                            x:Name="delete_button"
+                                            Margin="0,0,10,0"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center"
+                                            Text="╳"
+                                            Clicked="Delete_Clicked"
+                                            BackgroundColor="{DynamicResource Gray-White}"
+                                            FontSize="18"
+                                            FontFamily="Montserrat-Regular"
+                                            TextColor="{DynamicResource Gray-700}"/>
+                                    </Grid>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </control:CustomShadowFrame>
+                    <buttons:SfButton x:Name="update_btn"
+                        IsVisible="false"
+                        Margin="0,3,0,13"
+                        HorizontalOptions="End"
+                        BackgroundColor="Transparent"
+                        TextColor="{DynamicResource Gray-700}"
+                        FontSize="17"
+                        FontFamily="Montserrat-Regular"
+                        Text="✓"
+                        CornerRadius="13"
+                        WidthRequest="65"
+                        HeightRequest="37"
+                        BorderColor="{DynamicResource Gray-300}" BorderThickness="2"
+                        Clicked="Update_Clicked"/>
+
+
+
+                <Grid RowSpacing="20" ColumnSpacing="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="60" />
+                    </Grid.RowDefinitions>
+                    <TimePicker x:Name="timePicker" Grid.Row="0" Grid.Column="0"
+                                FontSize="17"
+                                FontFamily="Montserrat-Regular"
+                                TextColor="{DynamicResource Gray-700}"
+                                Format="HH:mm"/>
+                    <Picker x:Name="MealsPicker" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                            SelectedIndexChanged="MealsPicker_SelectedIndexChanged"
+                            Title="Приём пищи"
+                            TitleColor="{StaticResource Gray-700}"
+                            TextColor="{StaticResource Gray-900}"
+                            FontSize="18"
+                            FontFamily="Montserrat-Regular"/>
+              
+                    <buttons:SfButton Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                        Margin="0,16,0,0"
+                        HorizontalOptions="Center"
+                        Style="{StaticResource SfButtonStyle}"
+                        Text="ВНЕСТИ"
+                        Clicked="Put_Clicked"
+                        WidthRequest="400" />
+
+                </Grid>
+                </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

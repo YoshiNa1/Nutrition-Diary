@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <_AppExtensionDebugSymbolProperties Include="NutritionDiary_app.iOS.app">
+      <NativeExecutable>NutritionDiary_app.iOS</NativeExecutable>
+      <CompiledArchitectures>ARM64</CompiledArchitectures>
+      <NoDSymUtil>false</NoDSymUtil>
+      <NoSymbolStrip>false</NoSymbolStrip>
+      <SymbolsList>/Users/anastasiia/Projects/NutritionDiary_app/NutritionDiary_app.iOS/obj/iPhone/Debug/device-builds/iphone11.8-14.6/mtouch-symbols.list</SymbolsList>
+    </_AppExtensionDebugSymbolProperties>
+  </ItemGroup>
+</Project>

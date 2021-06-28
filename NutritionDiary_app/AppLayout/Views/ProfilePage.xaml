@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converter="clr-namespace:NutritionDiary_app.Converters"
+    xmlns:viewModel="clr-namespace:NutritionDiary_app.ViewModels"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    x:Class="NutritionDiary_app.AppLayout.Views.ProfilePage"
+    NavigationPage.HasNavigationBar="False">
+<ContentPage.Resources>
+    <ResourceDictionary>
+        <converter:BooleanToColorConverter x:Key="ColorConverter" />
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="Styles.xaml" />
+        </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+</ContentPage.Resources>
+<ContentPage.BindingContext>
+    <viewModel:ProfilePageViewModel />
+</ContentPage.BindingContext>
+<ContentPage.Content>
+    <ScrollView>
+    <StackLayout Padding="16" Spacing="16" BackgroundColor="{StaticResource Gray-White}">
+        <Grid
+            ColumnDefinitions="120, *, 120"
+            RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+            RowSpacing="25">
+
+            <Button Text = "Back" Clicked="Back_Clicked"
+                    CornerRadius="4"
+                    HeightRequest="35"
+                    WidthRequest="55"
+                    HorizontalOptions="Start" VerticalOptions="Start"
+                    BackgroundColor="Transparent"
+                    FontFamily="Montserrat-SemiBold"
+                    FontSize="12"
+                    TextColor="{DynamicResource PrimaryDarkColor}"
+                    Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"/>
+
+            <Label x:Name="Name_lbl" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="22"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="End"/>
+
+            <Label Text="Пол:" Grid.Row="2" Grid.Column="0"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+            <Label x:Name="Gender_lbl" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18" FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}" Grid.RowSpan="12"/>
+
+            <Label Text="Возраст:" Grid.Row="3" Grid.Column="0"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+            <Label x:Name="Age_lbl" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+            
+
+            <Label Text="Вес:" Grid.Row="4" Grid.Column="0"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+            <Label x:Name="Weight_lbl" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+            
+
+            <Label Text="Рост:" Grid.Row="5" Grid.Column="0"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+            <Label x:Name="Height_lbl" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+            
+
+
+            <Label Text="Уровень активности:" Grid.Row="6" Grid.RowSpan="2" Grid.Column="0"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+            <Label x:Name="Activity_lbl" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   VerticalOptions="Center"
+                   TextColor="{DynamicResource Gray-700}"/>
+           
+            <Label Text="Цель:" Grid.Row="7" Grid.Column="0"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+            <Label x:Name="Goal_lbl" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+            
+
+            <Label Text="Метаболизм:" Grid.Row="8" Grid.Column="0"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+            <Label x:Name="Metabolism_lbl" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+
+            <Label Text="ИМТ:" Grid.Row="9" Grid.Column="0"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+            <Label x:Name="BMI_lbl" Grid.Row="9" Grid.Column="1"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+
+            <Label Text="Калорий:" Grid.Row="10" Grid.Column="0"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+            <Label x:Name="Result_lbl" Grid.Row="10" Grid.Column="1"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+
+            <Label Text="Белков:" Grid.Row="11" Grid.Column="0"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+            <Label x:Name="Prots_lbl" Grid.Row="11" Grid.Column="1"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+
+            <Label Text="Жиров:" Grid.Row="12" Grid.Column="0"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+            <Label x:Name="Fats_lbl" Grid.Row="12" Grid.Column="1"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+
+            <Label Text="Углеводов:" Grid.Row="13" Grid.Column="0"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+            <Label x:Name="Carbs_lbl" Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="2"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="18"
+                   FontFamily="Montserrat-Regular"
+                   TextColor="{DynamicResource Gray-700}"/>
+
+
+            <buttons:SfButton Grid.Row="14" Grid.ColumnSpan="4"
+                Margin="0,16,0,0"
+                HorizontalOptions="Center"
+                Style="{StaticResource SfButtonStyle}"
+                Text="ИЗМЕНИТЬ"
+                Clicked="Edit_Clicked"
+                WidthRequest="200" />
+        </Grid>
+    </StackLayout>
+    </ScrollView>
+</ContentPage.Content>
+</ContentPage>

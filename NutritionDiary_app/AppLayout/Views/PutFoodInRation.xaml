@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converter="clr-namespace:NutritionDiary_app.Converters"
+    xmlns:viewModel="clr-namespace:NutritionDiary_app.ViewModels"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:control="clr-namespace:NutritionDiary_app.Controls"
+    x:Class="NutritionDiary_app.AppLayout.Views.PutFoodInRation"
+    Title="Добавить новый продукт в рацион"
+    BackgroundColor="{DynamicResource Gray-White}"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="20">
+
+                <Grid RowSpacing="40" ColumnSpacing="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="95" />
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="55" />
+                    </Grid.RowDefinitions>
+
+                    <Frame Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                        BackgroundColor="{DynamicResource Gray-White}"
+                        CornerRadius="20" Padding="20">
+                        <Button
+                            x:Name="FoodName_lbl"
+                            TextColor="{DynamicResource Gray-900}"
+                            Style="{StaticResource EntryStyle}"
+                            FontSize="16"
+                            FontFamily="Montserrat-SemiBold"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Start"
+                            HeightRequest="100"
+                            Clicked="FoodName_Clicked">
+                        </Button>
+                    </Frame>
+
+                    <border:SfBorder
+                        Grid.Row="1" Grid.Column="0"
+                        BorderColor="{Binding Source={x:Reference WeightEntry}, Path=IsFocused,
+                        Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource SfSquareBorderStyle}"
+                        HeightRequest="10"
+                        WidthRequest="50">
+                        <control:BorderlessEntry
+                            x:Name="WeightEntry"
+                            TextColor="{DynamicResource Gray-900}"
+                            PlaceholderColor="{DynamicResource Gray-700}"
+                            Keyboard="Numeric"
+                            Style="{StaticResource SquareEntryStyle}" />
+                    </border:SfBorder>
+                    <Label Grid.Row="1" Grid.Column="1"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        Margin="0" 
+                        FontSize="16"
+                        FontFamily="Montserrat-Regular"
+                        TextColor="{StaticResource Gray-700}" 
+                        Style="{StaticResource LabelStyle}"
+                        Text= " г "/>
+
+                    
+                    <TimePicker x:Name="timePicker" Grid.Row="2" Grid.Column="0"
+                                FontSize="17"
+                                FontFamily="Montserrat-Regular"
+                                TextColor="{DynamicResource Gray-700}"
+                                Format="HH:mm"/>
+                    <Picker x:Name="MealsPicker" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                            SelectedIndexChanged="MealsPicker_SelectedIndexChanged"
+                            Title="Приём пищи"
+                            TitleColor="{StaticResource Gray-700}"
+                            TextColor="{StaticResource Gray-900}"
+                            FontSize="18"
+                            FontFamily="Montserrat-Regular"/>
+                </Grid>
+
+                <buttons:SfButton
+                    Margin="0,16,0,0"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource SfButtonStyle}"
+                    Text="ВНЕСТИ"
+                    Clicked="Put_Clicked"
+                    WidthRequest="400" />
+
+
+                <!--<Label x:Name="CaloriesLabel"/>
+                <Label x:Name="ProteinsLabel"/>
+                <Label x:Name="FatsLabel"/>
+                <Label x:Name="CarbsLabel"/>-->
+
+                </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="NutritionDiary_app.AppLayout.Views.MainShell"
+    xmlns:views = "clr-namespace:NutritionDiary_app.AppLayout.Views"
+    NavigationPage.HasNavigationBar="False" HeightRequest="10" BackgroundColor="{DynamicResource PrimaryGradient}">
+    
+     <Shell.FlyoutHeader>
+        <StackLayout BackgroundColor="White" Padding="10">
+            <Label Text=" " />
+        </StackLayout>
+    </Shell.FlyoutHeader>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False">
+        <ShellContent Title="Главная" IsTabStop="True" ContentTemplate="{DataTemplate views:MainPageTabbedForm}"/>
+        <ShellContent Title="Профиль" IsTabStop="True" ContentTemplate="{DataTemplate views:ProfilePage}"/>
+    </FlyoutItem>
+            
+    <Shell.FlyoutFooter>
+        <StackLayout BackgroundColor="White" Padding="10">
+            <Button Text="Выйти" Clicked="Logout_Clicked"/>
+        </StackLayout>
+    </Shell.FlyoutFooter>
+
+</Shell>

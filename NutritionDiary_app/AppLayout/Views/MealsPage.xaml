@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    x:Class="NutritionDiary_app.AppLayout.Views.MealsPage"
+    NavigationPage.HasNavigationBar="False">
+<ContentPage.Resources>
+    <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="Styles.xaml" />
+        </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+</ContentPage.Resources>
+<ContentPage.Content>
+    <ScrollView>
+    <StackLayout Padding="16" Spacing="16" BackgroundColor="{StaticResource Gray-White}">
+        <Button Text = "Back" Clicked="Back_Clicked"
+            CornerRadius="4"
+            HeightRequest="40"
+            WidthRequest="55"
+            HorizontalOptions="Start" VerticalOptions="Start"
+            BackgroundColor="Transparent"
+            FontFamily="Montserrat-SemiBold"
+            FontSize="12"
+            TextColor="{DynamicResource PrimaryDarkColor}"/>
+        <buttons:SfButton
+            x:Name="addNewFood"
+            Margin="0,16,0,0"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Style="{StaticResource SfSquareButtonStyle}"
+            Text="Добавить новое блюдо"
+            Clicked="Add_Clicked"
+            WidthRequest="450"
+            HeightRequest="40"
+            FontSize="16"/>
+
+        <CollectionView x:Name="MealsList"
+                        IsVisible="false"
+                        SelectionChanged="MealsList_ItemSelected"
+                        SelectionMode="Single">
+        <CollectionView.ItemTemplate>
+             <DataTemplate>
+                <StackLayout Padding="10,0,0,0" Spacing="25" Margin="5">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup Name="CommonStates">                        
+                            <VisualState Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Pink" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                    <Grid RowDefinitions="45">
+                        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                            Text="{Binding MealName}"
+                            FontSize="18"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Start"
+                            FontFamily="Montserrat-Regular"
+                            TextColor="{DynamicResource Gray-700}"/>
+                        <Label Grid.Row="0" Grid.Column="3"
+                            Text="{Binding CaloriesInMeal, StringFormat='{0:f0} kcal'}"
+                            FontSize="14"
+                            VerticalOptions="Center"
+                            HorizontalOptions="End"
+                            FontFamily="Montserrat-Regular"
+                            TextColor="{DynamicResource PrimaryColor}"/>
+                    </Grid>
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </StackLayout>
+    </ScrollView>
+</ContentPage.Content>
+</ContentPage>

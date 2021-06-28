@@ -1,0 +1,178 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/anastasiia/Projects/NutritionDiary_app/NutritionDiary_app/NutritionDiary_app.csproj": {}
+  },
+  "projects": {
+    "/Users/anastasiia/Projects/NutritionDiary_app/NutritionDiary_app/NutritionDiary_app.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/anastasiia/Projects/NutritionDiary_app/NutritionDiary_app/NutritionDiary_app.csproj",
+        "projectName": "NutritionDiary_app",
+        "projectPath": "/Users/anastasiia/Projects/NutritionDiary_app/NutritionDiary_app/NutritionDiary_app.csproj",
+        "packagesPath": "/Users/anastasiia/.nuget/packages/",
+        "outputPath": "/Users/anastasiia/Projects/NutritionDiary_app/NutritionDiary_app/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/anastasiia/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "LessJie.System.Web.Http": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Microsoft.CSharp": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "SkiaSharp.Extended": {
+              "target": "Package",
+              "version": "[1.60.0, )"
+            },
+            "SkiaSharp.Svg": {
+              "target": "Package",
+              "version": "[1.60.0, )"
+            },
+            "SkiaSharp.Views.Forms": {
+              "target": "Package",
+              "version": "[2.80.2, )"
+            },
+            "Syncfusion.Xamarin.Buttons": {
+              "target": "Package",
+              "version": "[19.1.0.64, )"
+            },
+            "Syncfusion.Xamarin.Cards": {
+              "target": "Package",
+              "version": "[19.1.0.64, )"
+            },
+            "Syncfusion.Xamarin.Core": {
+              "target": "Package",
+              "version": "[19.1.0.64, )"
+            },
+            "Syncfusion.Xamarin.DataSource": {
+              "target": "Package",
+              "version": "[19.1.0.64, )"
+            },
+            "Syncfusion.Xamarin.Expander": {
+              "target": "Package",
+              "version": "[19.1.0.64, )"
+            },
+            "Syncfusion.Xamarin.GridCommon": {
+              "target": "Package",
+              "version": "[19.1.0.64, )"
+            },
+            "Syncfusion.Xamarin.SfBadgeView": {
+              "target": "Package",
+              "version": "[19.1.0.64, )"
+            },
+            "Syncfusion.Xamarin.SfCalendar": {
+              "target": "Package",
+              "version": "[19.1.0.64, )"
+            },
+            "Syncfusion.Xamarin.SfChart": {
+              "target": "Package",
+              "version": "[19.1.0.64, )"
+            },
+            "Syncfusion.Xamarin.SfComboBox": {
+              "target": "Package",
+              "version": "[19.1.0.64, )"
+            },
+            "Syncfusion.Xamarin.SfGauge": {
+              "target": "Package",
+              "version": "[19.1.0.64, )"
+            },
+            "Syncfusion.Xamarin.SfListView": {
+              "target": "Package",
+              "version": "[19.1.0.64, )"
+            },
+            "Syncfusion.Xamarin.SfParallaxView": {
+              "target": "Package",
+              "version": "[19.1.0.64, )"
+            },
+            "Syncfusion.Xamarin.SfPicker": {
+              "target": "Package",
+              "version": "[19.1.0.64, )"
+            },
+            "Syncfusion.Xamarin.SfPopupLayout": {
+              "target": "Package",
+              "version": "[19.1.0.64, )"
+            },
+            "Syncfusion.Xamarin.SfProgressBar": {
+              "target": "Package",
+              "version": "[19.1.0.64, )"
+            },
+            "Syncfusion.Xamarin.SfRating": {
+              "target": "Package",
+              "version": "[19.1.0.64, )"
+            },
+            "Syncfusion.Xamarin.SfRotator": {
+              "target": "Package",
+              "version": "[19.1.0.64, )"
+            },
+            "Syncfusion.Xamarin.SfTabView": {
+              "target": "Package",
+              "version": "[19.1.0.64, )"
+            },
+            "Xam.Plugins.Settings": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Xamarin.Essentials": {
+              "target": "Package",
+              "version": "[1.6.1, )"
+            },
+            "Xamarin.Forms": {
+              "target": "Package",
+              "version": "[5.0.0.2012, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.203/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

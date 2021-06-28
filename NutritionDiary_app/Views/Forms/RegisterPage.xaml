@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NutritionDiary_app.Views.Forms.RegisterPage"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:tabView="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+             xmlns:viewModel="clr-namespace:NutritionDiary_app.ViewModels.Forms"
+             xmlns:control="clr-namespace:NutritionDiary_app.Controls"
+             xmlns:converter="clr-namespace:NutritionDiary_app.Converters"
+             x:Name="RegisterForm"
+             Title="Register Form"
+             BackgroundColor="{DynamicResource Gray-200}"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converter:NameValidationConverter x:Key="FirstValidationErrorConverter" />
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <converter:ErrorValidationColorConverter x:Key="ErrorValidationColorConverter" />
+            <converter:StringToBooleanConverter x:Key="StringToBooleanConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+         <viewModel:SignUpPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <ScrollView Padding="0,16">
+            <ScrollView.HorizontalOptions>
+                <OnIdiom
+                    x:TypeArguments="LayoutOptions"
+                    Default="Center"
+                    Phone="FillAndExpand" />
+            </ScrollView.HorizontalOptions>
+            <ScrollView.VerticalOptions>
+                <OnIdiom
+                    x:TypeArguments="LayoutOptions"
+                    Default="CenterAndExpand"
+                    Phone="FillAndExpand" />
+            </ScrollView.VerticalOptions>
+            <StackLayout>
+                <StackLayout.BindingContext>
+                    <viewModel:SignUpPageViewModel/>
+                </StackLayout.BindingContext>
+                <control:CustomShadowFrame Margin="24,8" Padding="0">
+                    <tabView:SfTabView VisibleHeaderCount="1" >
+                        <tabView:SfTabView.SelectionIndicatorSettings>
+                            <tabView:SelectionIndicatorSettings Color="{DynamicResource PrimaryColor}"
+                                                            StrokeThickness="3"/>
+
+                        </tabView:SfTabView.SelectionIndicatorSettings>
+                       
+
+                        <tabView:SfTabItem Title="Sign Up" SelectionColor="{DynamicResource PrimaryColor}"
+                                           TitleFontFamily="Montserrat-Regular"
+                                           TitleFontSize="14"
+                                           TitleFontColor="{DynamicResource Gray-700}">
+                            <tabView:SfTabItem.BindingContext>
+                                <viewModel:SignUpPageViewModel/>
+                            </tabView:SfTabItem.BindingContext>
+                            <tabView:SfTabItem.Content>
+                                <StackLayout Padding="16,16,16,36" Spacing="24" HorizontalOptions="Center">
+                                    <!--  Entry to get username from user  -->
+                                    <border:SfBorder
+                                    BackgroundColor="{DynamicResource Gray-White}"
+                                    BorderColor="{Binding Source={x:Reference NameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                    Style="{StaticResource SfBorderStyle}">
+                                        <control:BorderlessEntry
+                                        x:Name="NameEntry"
+                                        Placeholder="Ваше имя"
+                                        PlaceholderColor="{DynamicResource Gray-700}"
+                                        Style="{StaticResource EntryStyle}"
+                                        Text="{Binding ProfileName}"
+                                        TextColor="{DynamicResource Gray-900}" />
+                                    </border:SfBorder>
+
+                                    <!--  Entry to get email ID from user  -->
+
+                                    <!--<local:SimpleEmailEntry />-->
+
+
+                                    <!--SimpleEmailEntry here!!-->
+                                    <!--Email-->
+                                    <border:SfBorder
+                                        BackgroundColor="{DynamicResource Gray-White}"
+                                        BorderColor="{Binding Path=IsFocused, Source={x:Reference EmailEntryForSignUp}, Converter={StaticResource ErrorValidationColorConverter}, ConverterParameter={x:Reference EmailEntryForSignUp}}"
+                                        Style="{StaticResource SfBorderStyle}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <control:BorderlessEntry
+                                                x:Name="EmailEntryForSignUp"
+                                                Placeholder="Email" Keyboard="Email"
+                                                PlaceholderColor="{DynamicResource Gray-700}"
+                                                Style="{StaticResource EntryStyle}"
+                                                Text="{Binding Email}"
+                                                TextColor="{DynamicResource Gray-900}" />
+
+                                            <Label
+                                                Margin="15,0"
+                                                FontFamily="{StaticResource FontIcons}"
+                                                FontSize="18"
+                                                HorizontalOptions="EndAndExpand"
+                                                HorizontalTextAlignment="End"
+                                                IsVisible="{Binding Path=IsVisible, Source={x:Reference ValidationLabel}}"
+                                                Text="&#xe707;"
+                                                TextColor="{DynamicResource Red}"
+                                                VerticalOptions="Center" />
+                                        </Grid>
+                                    </border:SfBorder>
+
+                                    <!--  Entry to get password from user  -->
+                                    <border:SfBorder                        
+                                    BackgroundColor="{DynamicResource Gray-White}"
+                                    BorderColor="{Binding Source={x:Reference SignupPasswordEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                    Style="{StaticResource SfBorderStyle}">
+                                        <control:BorderlessEntry
+                                        x:Name="SignupPasswordEntry"
+                                        IsPassword="true"
+                                        Placeholder="Пароль"
+                                        PlaceholderColor="{DynamicResource Gray-700}"
+                                        Style="{StaticResource EntryStyle}"
+                                        Text="{Binding Password}"
+                                        TextColor="{DynamicResource Gray-900}" />
+                                    </border:SfBorder>
+
+                                    <!--  Entry to get the confirm password from user  -->
+                                    <border:SfBorder
+                                    BackgroundColor="{DynamicResource Gray-White}"
+                                    BorderColor="{Binding Source={x:Reference ConfirmPasswordEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                    Style="{StaticResource SfBorderStyle}">
+                                        <control:BorderlessEntry
+                                        x:Name="ConfirmPasswordEntry"
+                                        IsPassword="true"
+                                        Placeholder="Подтвердить пароль"
+                                        PlaceholderColor="{DynamicResource Gray-700}"
+                                        Style="{StaticResource EntryStyle}"
+                                        Text="{Binding ConfirmPassword}"
+                                        TextColor="{DynamicResource Gray-900}" />
+                                    </border:SfBorder>
+
+                                    <!--  Sign-up button  -->
+                                    <buttons:SfButton
+                                        HorizontalOptions="Center"
+                                        CornerRadius="20"
+                                        WidthRequest="245"
+                                        FontFamily="Montserrat-SemiBold"
+                                        Style="{StaticResource SfButtonStyle}"
+                                        Command="{Binding RegisterCommand}"
+                                        Clicked="SignUp_Clicked"
+                                        Text="ЗАРЕГИСТРИРОВАТЬСЯ" />
+
+                                    <Label
+                                        x:Name="ValidationLabel"
+                                        Margin="15,-5,0,0"
+                                        FontSize="12"
+                                        IsVisible="{Binding Path=IsFocused, Source={x:Reference EmailEntryForSignUp}, Converter={StaticResource StringToBooleanConverter}, ConverterParameter={x:Reference EmailEntryForSignUp}}"
+                                        Text="Пожалуйста, введите корректный email!"
+                                        TextColor="{DynamicResource Red}"
+                                        VerticalOptions="FillAndExpand" />
+
+                                </StackLayout>
+                            </tabView:SfTabItem.Content>
+                        </tabView:SfTabItem>
+                    </tabView:SfTabView>
+                </control:CustomShadowFrame>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

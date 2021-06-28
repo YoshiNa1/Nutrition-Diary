@@ -1,0 +1,1284 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NutritionDiary_app.AppLayout.Views.MainPageTabbedForm"
+             xmlns:tabView="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+             xmlns:converter="clr-namespace:NutritionDiary_app.Converters"
+             xmlns:control="clr-namespace:NutritionDiary_app.AppLayout.Controls"
+             xmlns:viewModel="clr-namespace:NutritionDiary_app.ViewModels"
+             xmlns:gauge="clr-namespace:Syncfusion.SfGauge.XForms;assembly=Syncfusion.SfGauge.XForms"
+             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             x:Name="MainForm"
+             Title="Главная"
+             BackgroundColor="{DynamicResource Gray-200}"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <converter:StringToBooleanConverter x:Key="StringToBooleanConverter" />
+            <converter:ErrorValidationColorConverter x:Key="ErrorValidationColorConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <viewModel:OverviewViewModel x:Name="CalorieViewModel" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <ScrollView Padding="0,16">
+            <ScrollView.HorizontalOptions>
+                <OnIdiom
+                    x:TypeArguments="LayoutOptions"
+                    Default="Center"
+                    Phone="FillAndExpand" />
+            </ScrollView.HorizontalOptions>
+            <ScrollView.VerticalOptions>
+                <OnIdiom
+                    x:TypeArguments="LayoutOptions"
+                    Default="CenterAndExpand"
+                    Phone="FillAndExpand" />
+            </ScrollView.VerticalOptions>
+
+            <StackLayout>
+                 <!--<tabView:SfTabItem
+                                           Title="Профиль" SelectionColor="{DynamicResource PrimaryColor}"
+                                           TitleFontFamily="Montserrat-Regular"
+                                           TitleFontSize="14"
+                                           TitleFontColor="{DynamicResource Gray-700}">
+                            <tabView:SfTabItem.BindingContext>
+                                <viewModel:ProfilePageViewModel/>
+                            </tabView:SfTabItem.BindingContext>
+                            <tabView:SfTabItem.Content>
+
+                                <StackLayout Padding="16,16,16,36" Spacing="24" HorizontalOptions="Center">
+
+                                     <buttons:SfButton
+                                        Margin="0,16,0,0"
+                                        HorizontalOptions="Center"
+                                        Style="{StaticResource SfButtonStyle}"
+                                        Text="Профиль"
+                                        WidthRequest="200" />
+
+                                </StackLayout>
+                            </tabView:SfTabItem.Content>
+                         </tabView:SfTabItem>
+                <control:CustomShadowFrame Margin="24,8" Padding="0"/>-->
+
+                    <tabView:SfTabView VisibleHeaderCount="2" TabHeight="32" >
+
+                        <tabView:SfTabView.SelectionIndicatorSettings>
+                            <tabView:SelectionIndicatorSettings Color="{DynamicResource PrimaryColor}"
+                                                            StrokeThickness="3"/>
+                        </tabView:SfTabView.SelectionIndicatorSettings>
+
+
+
+                        <tabView:SfTabItem Title="Обзор" SelectionColor="{DynamicResource PrimaryColor}" 
+                                           TitleFontFamily="{StaticResource Montserrat-Regular}"
+                                           TitleFontSize="14"
+                                           TitleFontColor="{DynamicResource Gray-700}"
+                                           HorizontalOptions="Center">
+                          <!--<tabView:SfTabItem.BindingContext>
+                             <viewModel:OverviewViewModel/>
+                          </tabView:SfTabItem.BindingContext>-->
+                          <tabView:SfTabItem.Content>
+                                <Grid>
+                                    <gradient:SfGradientView>
+                                        <gradient:SfGradientView.BackgroundBrush>
+                                            <gradient:SfLinearGradientBrush>
+                                                <gradient:SfLinearGradientBrush.GradientStops>
+                                                    <gradient:SfGradientStop Offset="0" Color="{DynamicResource VioletGradientStart}" />
+                                                    <gradient:SfGradientStop Offset="1" Color="{DynamicResource VioletGradientEnd}" />
+                                                </gradient:SfLinearGradientBrush.GradientStops>
+                                            </gradient:SfLinearGradientBrush>
+                                        </gradient:SfGradientView.BackgroundBrush>
+                                    </gradient:SfGradientView>
+
+                                    <ScrollView>
+
+                                        <Grid
+                                            ColumnDefinitions = "0, 16, *, 16"
+                                            ColumnSpacing="0"
+                                            RowDefinitions="Auto, Auto, Auto, *"
+                                            RowSpacing="0">
+
+                                            <!--<Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="{OnIdiom Phone 16}" />
+                                                <ColumnDefinition Width="{OnIdiom Phone *}" />
+                                                <ColumnDefinition Width="{OnIdiom Phone 16}" />
+                                            </Grid.ColumnDefinitions>-->
+
+                                            <Picker x:Name="MenuPicker"
+                                                    SelectedIndexChanged="MenuPicker_SelectedIndexChanged"
+                                                    Title="Menu"
+                                                    TitleColor="{DynamicResource Gray-White}"
+                                                    TextColor="{DynamicResource Gray-White}"
+                                                    BackgroundColor="#3d3c6b"
+                                                    FontSize="16"
+                                                    HeightRequest="40"
+                                                    FontFamily="Montserrat-Regular"
+                                                    VerticalTextAlignment="Center"
+                                                    Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5"/>
+                                            
+
+                                           <!--<Button Text="Logout" Clicked="Logout_Clicked"
+                                                    CornerRadius="4"
+                                                    HeightRequest="40"
+                                                    WidthRequest="65"
+                                                    BackgroundColor="#3d3c6b"
+                                                    FontFamily="Montserrat-SemiBold"
+                                                    FontSize="14"
+                                                    TextColor="{DynamicResource Gray-White}"
+                                                    Grid.Row="0" Grid.Column="3"/>-->
+
+                                            <!--<Button Text="Profile" Clicked="Profile_Clicked"
+                                                    CornerRadius="4"
+                                                    HeightRequest="40"
+                                                    WidthRequest="65"
+                                                    BackgroundColor="#3d3c6b"
+                                                    FontFamily="Montserrat-SemiBold"
+                                                    FontSize="14"
+                                                    TextColor="{DynamicResource Gray-White}"
+                                                    Grid.Row="0" Grid.Column="1"/>-->
+
+                                           <CollectionView x:Name="CaloriesGauge" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4"
+                                                           IsVisible="true" HeightRequest="300">
+                                               <CollectionView.ItemTemplate>
+                                                   <DataTemplate>
+                                                       <Grid
+                                                            ColumnSpacing="0"
+                                                            RowDefinitions="Auto, Auto, Auto, *"
+                                                            RowSpacing="0">
+                                                           <Grid.ColumnDefinitions>
+                                                               <ColumnDefinition Width="16" />
+                                                               <ColumnDefinition Width="*" />
+                                                               <ColumnDefinition Width="16" />
+                                                           </Grid.ColumnDefinitions>
+
+
+                                                        <gauge:SfCircularGauge
+                                                            Grid.Row="1"
+                                                            Grid.Column="1"
+                                                            Grid.ColumnSpan="3"
+                                                            Margin="0,40"
+                                                            BackgroundColor="Transparent"
+                                                            HeightRequest="190"
+                                                            HorizontalOptions="Center"
+                                                            WidthRequest="190">
+
+                                                        <gauge:SfCircularGauge.Headers>
+                                                            <gauge:Header
+                                                                ForegroundColor="{DynamicResource Gray-White}"
+                                                                Position="0.35,0.4"
+                                                                Text="{Binding CaloriesConsumed, StringFormat='{0:f0}'}"
+                                                                TextSize="22"/>
+                                                            <gauge:Header
+                                                                ForegroundColor="{DynamicResource Gray-White}"
+                                                                Position="0.5,0.4"
+                                                                Text="/"
+                                                                TextSize="22" />
+                                                            <gauge:Header
+                                                                ForegroundColor="{DynamicResource Gray-White}"
+                                                                Position="0.65,0.4"
+                                                                Text="{Binding Result, StringFormat='{0:f0}'}"
+                                                                TextSize="22" />
+                                                            <gauge:Header
+                                                                ForegroundColor="{DynamicResource Gray-White}"
+                                                                Position="0.5, 0.55"
+                                                                Text="kcal употреблено"
+                                                                TextSize="12" />
+                                                        </gauge:SfCircularGauge.Headers>
+
+                                                        <gauge:SfCircularGauge.Scales>
+                                                            <gauge:Scale
+                                                                EndValue="{Binding Result}"
+                                                                ShowLabels="False"
+                                                                ShowRim="False"
+                                                                ShowTicks="False"
+                                                                StartAngle="0"
+                                                                SweepAngle="360">
+
+                                                                <gauge:Scale.Pointers>
+                                                                    <gauge:RangePointer Color="#7cf74c" Value="{Binding CaloriesConsumed}" Thickness="10"/>
+                                                                </gauge:Scale.Pointers>
+                                                            </gauge:Scale>
+                                                        </gauge:SfCircularGauge.Scales>
+
+                                                       </gauge:SfCircularGauge>
+                                                           </Grid>
+                                                           </DataTemplate>
+                                                       </CollectionView.ItemTemplate>
+                                                   </CollectionView>
+
+
+
+                                            <CollectionView x:Name="ProteinsGauge" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4"
+                                                           IsVisible="false" HeightRequest="300">
+                                               <CollectionView.ItemTemplate>
+                                                   <DataTemplate>
+                                                       <Grid
+                                                            ColumnSpacing="0"
+                                                            RowDefinitions="Auto, Auto, Auto, *"
+                                                            RowSpacing="0">
+                                                           <Grid.ColumnDefinitions>
+                                                               <ColumnDefinition Width="16" />
+                                                               <ColumnDefinition Width="*" />
+                                                               <ColumnDefinition Width="16" />
+                                                           </Grid.ColumnDefinitions>
+
+
+                                                        <gauge:SfCircularGauge
+                                                            Grid.Row="1"
+                                                            Grid.Column="1"
+                                                            Grid.ColumnSpan="3"
+                                                            Margin="0,40"
+                                                            BackgroundColor="Transparent"
+                                                            HeightRequest="190"
+                                                            HorizontalOptions="Center"
+                                                            WidthRequest="190">
+
+                                                        <gauge:SfCircularGauge.Headers>
+                                                            <gauge:Header
+                                                                ForegroundColor="{DynamicResource Gray-White}"
+                                                                Position="0.35,0.4"
+                                                                Text="{Binding ProteinsConsumed, StringFormat='{0:f0}'}"
+                                                                TextSize="22"/>
+                                                            <gauge:Header
+                                                                ForegroundColor="{DynamicResource Gray-White}"
+                                                                Position="0.5,0.4"
+                                                                Text="/"
+                                                                TextSize="22" />
+                                                            <gauge:Header
+                                                                ForegroundColor="{DynamicResource Gray-White}"
+                                                                Position="0.65,0.4"
+                                                                Text="{Binding Proteins, StringFormat='{0:f0}'}"
+                                                                TextSize="22" />
+                                                            <gauge:Header
+                                                                ForegroundColor="{DynamicResource Gray-White}"
+                                                                Position="0.5, 0.55"
+                                                                Text="белков употреблено"
+                                                                TextSize="12" />
+                                                        </gauge:SfCircularGauge.Headers>
+
+                                                        <gauge:SfCircularGauge.Scales>
+                                                            <gauge:Scale
+                                                                EndValue="{Binding Proteins}"
+                                                                ShowLabels="False"
+                                                                ShowRim="False"
+                                                                ShowTicks="False"
+                                                                StartAngle="0"
+                                                                SweepAngle="360">
+
+                                                                <gauge:Scale.Pointers>
+                                                                    <gauge:RangePointer Color="#5588fe" Value="{Binding ProteinsConsumed}" Thickness="10"/>
+                                                                </gauge:Scale.Pointers>
+                                                            </gauge:Scale>
+                                                        </gauge:SfCircularGauge.Scales>
+
+                                                       </gauge:SfCircularGauge>
+                                                           </Grid>
+                                                           </DataTemplate>
+                                                       </CollectionView.ItemTemplate>
+                                                   </CollectionView>
+
+
+
+                                            <CollectionView x:Name="FatsGauge" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4"
+                                                           IsVisible="false" HeightRequest="300">
+                                               <CollectionView.ItemTemplate>
+                                                   <DataTemplate>
+                                                       <Grid
+                                                            ColumnSpacing="0"
+                                                            RowDefinitions="Auto, Auto, Auto, *"
+                                                            RowSpacing="0">
+                                                           <Grid.ColumnDefinitions>
+                                                               <ColumnDefinition Width="16" />
+                                                               <ColumnDefinition Width="*" />
+                                                               <ColumnDefinition Width="16" />
+                                                           </Grid.ColumnDefinitions>
+
+                                                            
+                                                        <gauge:SfCircularGauge
+                                                            Grid.Row="1"
+                                                            Grid.Column="1"
+                                                            Grid.ColumnSpan="3"
+                                                            Margin="0,40"
+                                                            BackgroundColor="Transparent"
+                                                            HeightRequest="190"
+                                                            HorizontalOptions="Center"
+                                                            WidthRequest="190">
+
+                                                        <gauge:SfCircularGauge.Headers>
+                                                            <gauge:Header
+                                                                ForegroundColor="{DynamicResource Gray-White}"
+                                                                Position="0.35,0.4"
+                                                                Text="{Binding FatsConsumed, StringFormat='{0:f0}'}"
+                                                                TextSize="22"/>
+                                                            <gauge:Header
+                                                                ForegroundColor="{DynamicResource Gray-White}"
+                                                                Position="0.5,0.4"
+                                                                Text="/"
+                                                                TextSize="22" />
+                                                            <gauge:Header
+                                                                ForegroundColor="{DynamicResource Gray-White}"
+                                                                Position="0.65,0.4"
+                                                                Text="{Binding Fats, StringFormat='{0:f0}'}"
+                                                                TextSize="22" />
+                                                            <gauge:Header
+                                                                ForegroundColor="{DynamicResource Gray-White}"
+                                                                Position="0.5, 0.55"
+                                                                Text="жиров употреблено"
+                                                                TextSize="12" />
+                                                        </gauge:SfCircularGauge.Headers>
+
+                                                        <gauge:SfCircularGauge.Scales>
+                                                            <gauge:Scale
+                                                                EndValue="{Binding Fats}"
+                                                                ShowLabels="False"
+                                                                ShowRim="False"
+                                                                ShowTicks="False"
+                                                                StartAngle="0"
+                                                                SweepAngle="360">
+
+                                                                <gauge:Scale.Pointers>
+                                                                    <gauge:RangePointer Color="#fe6751" Value="{Binding FatsConsumed}" Thickness="10"/>
+                                                                </gauge:Scale.Pointers>
+                                                            </gauge:Scale>
+                                                        </gauge:SfCircularGauge.Scales>
+
+                                                       </gauge:SfCircularGauge>
+                                                           </Grid>
+                                                           </DataTemplate>
+                                                       </CollectionView.ItemTemplate>
+                                                   </CollectionView>
+
+
+
+
+                                            <CollectionView x:Name="CarbsGauge" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4"
+                                                           IsVisible="false" HeightRequest="300">
+                                               <CollectionView.ItemTemplate>
+                                                   <DataTemplate>
+                                                       <Grid
+                                                            ColumnSpacing="0"
+                                                            RowDefinitions="Auto, Auto, Auto, *"
+                                                            RowSpacing="0">
+                                                           <Grid.ColumnDefinitions>
+                                                               <ColumnDefinition Width="16" />
+                                                               <ColumnDefinition Width="*" />
+                                                               <ColumnDefinition Width="16" />
+                                                           </Grid.ColumnDefinitions>
+
+
+                                                        <gauge:SfCircularGauge
+                                                            Grid.Row="1"
+                                                            Grid.Column="1"
+                                                            Grid.ColumnSpan="3"
+                                                            Margin="0,40"
+                                                            BackgroundColor="Transparent"
+                                                            HeightRequest="190"
+                                                            HorizontalOptions="Center"
+                                                            WidthRequest="190">
+
+                                                        <gauge:SfCircularGauge.Headers>
+                                                            <gauge:Header
+                                                                ForegroundColor="{DynamicResource Gray-White}"
+                                                                Position="0.35,0.4"
+                                                                Text="{Binding CarbsConsumed, StringFormat='{0:f0}'}"
+                                                                TextSize="22"/>
+                                                            <gauge:Header
+                                                                ForegroundColor="{DynamicResource Gray-White}"
+                                                                Position="0.5,0.4"
+                                                                Text="/"
+                                                                TextSize="22" />
+                                                            <gauge:Header
+                                                                ForegroundColor="{DynamicResource Gray-White}"
+                                                                Position="0.65,0.4"
+                                                                Text="{Binding Carbs, StringFormat='{0:f0}'}"
+                                                                TextSize="22" />
+                                                            <gauge:Header
+                                                                ForegroundColor="{DynamicResource Gray-White}"
+                                                                Position="0.5, 0.55"
+                                                                Text="углеводов употреблено"
+                                                                TextSize="12" />
+                                                        </gauge:SfCircularGauge.Headers>
+
+                                                        <gauge:SfCircularGauge.Scales>
+                                                            <gauge:Scale
+                                                                EndValue="{Binding Carbs}"
+                                                                ShowLabels="False"
+                                                                ShowRim="False"
+                                                                ShowTicks="False"
+                                                                StartAngle="0"
+                                                                SweepAngle="360">
+
+                                                                <gauge:Scale.Pointers>
+                                                                    <gauge:RangePointer Color="#fd50c8" Value="{Binding CarbsConsumed}" Thickness="10"/>
+                                                                </gauge:Scale.Pointers>
+                                                            </gauge:Scale>
+                                                        </gauge:SfCircularGauge.Scales>
+
+                                                       </gauge:SfCircularGauge>
+                                                           </Grid>
+                                                           </DataTemplate>
+                                                       </CollectionView.ItemTemplate>
+                                                   </CollectionView>
+
+
+                                            <StackLayout Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4"
+                                                         Margin="0,0,0,24" HorizontalOptions="CenterAndExpand" HeightRequest="144">
+                                            <Grid ColumnDefinitions="Auto, Auto, Auto, Auto" ColumnSpacing="4" >
+                                            <buttons:SfButton x:Name="Calories_button"
+                                                              Grid.Column="0"
+                                                              Clicked="CaloriesButton_Clicked"
+                                                              CornerRadius="4"
+                                                              HeightRequest="80"
+                                                              WidthRequest="80"
+                                                              BackgroundColor="#3d3c6b"
+                                                              FontFamily="Montserrat-SemiBold"
+                                                              FontSize="13"
+                                                              HorizontalOptions="Center"
+                                                              Text="Калории"
+                                                              TextColor="{DynamicResource Gray-White}">
+                                            </buttons:SfButton>
+
+                                            <buttons:SfButton  Grid.Column="1"
+                                                            Clicked="ProteinsButton_Clicked"
+                                                            CornerRadius="4"
+                                                            HeightRequest="80"
+                                                            WidthRequest="80"
+                                                            BackgroundColor="#3d3c6b"
+                                                            FontFamily="Montserrat-SemiBold"
+                                                            FontSize="13"
+                                                            HorizontalOptions="Center"
+                                                            Text="Белки"
+                                                            TextColor="{DynamicResource Gray-White}">
+                                            </buttons:SfButton>
+                                            <buttons:SfButton  Grid.Column="2"
+                                                            Clicked="FatsButton_Clicked"
+                                                            CornerRadius="4"
+                                                            HeightRequest="80"
+                                                            WidthRequest="80"
+                                                            BackgroundColor="#3d3c6b"
+                                                            FontFamily="Montserrat-SemiBold"
+                                                            FontSize="13"
+                                                            HorizontalOptions="Center"
+                                                            Text="Жиры"
+                                                            TextColor="{DynamicResource Gray-White}" >
+                                            </buttons:SfButton>
+                                            <buttons:SfButton  Grid.Column="3"
+                                                            Clicked="CarbsButton_Clicked"
+                                                            CornerRadius="4"
+                                                            HeightRequest="80"
+                                                            WidthRequest="80"
+                                                            BackgroundColor="#3d3c6b"
+                                                            FontFamily="Montserrat-SemiBold"
+                                                            FontSize="13"
+                                                            HorizontalOptions="Center"
+                                                            Text="Углеводы"
+                                                            TextColor="{DynamicResource Gray-White}">
+                                            </buttons:SfButton>
+                                             </Grid>
+                                             </StackLayout>
+
+
+                                            <!--<listView:SfListView
+                                                x:Name="Sessions"
+                                                Grid.Row="2"
+                                                Grid.Column="1"
+                                                Margin="0,0,0,24"
+                                                AutoFitMode="None"
+                                                HeightRequest="164"
+                                                HorizontalOptions="CenterAndExpand"
+                                                IsScrollBarVisible="False"
+                                                ItemSize="80"
+                                                ItemSpacing="4"
+                                                ItemsSource="{Binding CardItems}"
+                                                SelectionMode="None">
+
+                                                <listView:SfListView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid BackgroundColor="#3d3c6b" WidthRequest="80">
+
+                                                            <buttons:SfButton
+                                                                Command="{Binding Path=BindingContext.SessionCommand, Source={x:Reference Sessions}}"
+                                                                CommandParameter="{Binding .}"
+                                                                CornerRadius="4"
+                                                                Text="{Binding Session}"
+                                                                Clicked="SessionButton_Clicked">
+
+                                                                <buttons:SfButton.Triggers>
+                                                                    <DataTrigger
+                                                                        Binding="{Binding EnableButton}"
+                                                                        TargetType="buttons:SfButton"
+                                                                        Value="false">
+                                                                        <Setter Property="BackgroundColor" Value="Transparent" />
+                                                                    </DataTrigger>
+
+                                                                    <DataTrigger
+                                                                        Binding="{Binding EnableButton}"
+                                                                        TargetType="buttons:SfButton"
+                                                                        Value="true">
+                                                                        <Setter Property="BackgroundGradient">
+                                                                            <Setter.Value>
+                                                                                <gradient:SfLinearGradientBrush>
+                                                                                    <gradient:SfLinearGradientBrush.GradientStops>
+                                                                                        <gradient:SfGradientStop Offset="0" Color="{DynamicResource PrimaryColor}" />
+                                                                                        <gradient:SfGradientStop Offset="1" Color="{DynamicResource PrimaryGradient}" />
+                                                                                    </gradient:SfLinearGradientBrush.GradientStops>
+                                                                                </gradient:SfLinearGradientBrush>
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                    </DataTrigger>
+                                                                </buttons:SfButton.Triggers>
+
+                                                                <buttons:SfButton.Content>
+                                                                    <StackLayout Padding="0,12" Spacing="8">
+
+                                                                        <Label
+                                                                            FontFamily="FontIcons"
+                                                                            FontSize="32"
+                                                                            HorizontalOptions="Center"
+                                                                            Text="{Binding Icon}"
+                                                                            TextColor="White"
+                                                                            VerticalTextAlignment="Center" />
+
+                                                                        <Label
+                                                                            FontFamily="Montserrat-SemiBold"
+                                                                            FontSize="12"
+                                                                            HorizontalOptions="Center"
+                                                                            LineHeight="1.25"
+                                                                            Text="{Binding Session}"
+                                                                            TextColor="{DynamicResource Gray-White}" />
+
+                                                                    </StackLayout>
+                                                                </buttons:SfButton.Content>
+                                                            </buttons:SfButton>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </listView:SfListView.ItemTemplate>
+
+                                                <listView:SfListView.LayoutManager>
+                                                    <listView:GridLayout SpanCount="4" />
+                                                </listView:SfListView.LayoutManager>
+
+                                            </listView:SfListView>-->
+
+                                            <StackLayout
+                                                Grid.Row="3"
+                                                Grid.Column="1"
+                                                Grid.ColumnSpan="4"
+                                                BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                WidthRequest="320"
+                                                HeightRequest="350"
+                                                Spacing="0"
+                                                VerticalOptions="FillAndExpand">
+                                                <Grid>
+                                                     <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="16" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="16" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <control:CustomShadowFrame
+                                                        Grid.Column="1"
+                                                        Margin="0,-60,0,16"
+                                                        Padding="0"
+                                                        BackgroundColor="{DynamicResource GrayShadowColor}"
+                                                        BorderWidth="0"
+                                                        CornerRadius="4"
+                                                        HasShadow="True"
+                                                        HeightRequest="350"
+                                                        Radius="4">
+
+                                                        <control:CustomShadowFrame.Content>
+                                                            <border:SfBorder BorderWidth="0" CornerRadius="4">
+
+                                                                <Label x:Name="UserInfo_lbl"
+                                                                       FontFamily="Montserrat-SemiBold"
+                                                                       FontSize="14"
+                                                                       TextColor="{DynamicResource Gray-700}" IsVisible="False"/>
+                                                                
+                                                                <!--<CollectionView x:Name="All_FoodsList">
+                                                                <CollectionView.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                            <StackLayout HeightRequest="55">
+                                                                                <Grid>
+                                                                                <Label Grid.Row="0" Grid.Column="0"
+                                                                                    Text="{Binding CaloriesConsumed}"
+                                                                                    FontSize="17"
+                                                                                    VerticalOptions="Start"
+                                                                                    HorizontalOptions="Start"
+                                                                                    FontFamily="Montserrat-Regular"
+                                                                                    TextColor="{DynamicResource Gray-700}"
+                                                                                    Margin="10"/>
+                                                                                <Label Grid.Row="0" Grid.Column="1"
+                                                                                    Text="{Binding ProteinsConsumed}"
+                                                                                    FontSize="17"
+                                                                                    VerticalOptions="Start"
+                                                                                    HorizontalOptions="Start"
+                                                                                    FontFamily="Montserrat-Regular"
+                                                                                    TextColor="{DynamicResource Gray-700}"
+                                                                                    Margin="10"/>
+                                                                                <Label Grid.Row="0" Grid.Column="2"
+                                                                                    Text="{Binding FatsConsumed}"
+                                                                                    FontSize="17"
+                                                                                    VerticalOptions="Start"
+                                                                                    HorizontalOptions="Start"
+                                                                                    FontFamily="Montserrat-Regular"
+                                                                                    TextColor="{DynamicResource Gray-700}"
+                                                                                    Margin="10"/>
+                                                                                <Label Grid.Row="0" Grid.Column="3"
+                                                                                    Text="{Binding CarbsConsumed}"
+                                                                                    FontSize="17"
+                                                                                    VerticalOptions="Start"
+                                                                                    HorizontalOptions="Start"
+                                                                                    FontFamily="Montserrat-Regular"
+                                                                                    TextColor="{DynamicResource Gray-700}"
+                                                                                    Margin="10"/>
+                                                                                </Grid>
+                                                                                </StackLayout>
+                                                                    </DataTemplate>
+                                                                </CollectionView.ItemTemplate>
+                                                            </CollectionView>-->
+
+                                                                <!--<listView:SfListView
+                                                                    x:Name="SfListView"
+                                                                    Margin="0"
+                                                                    AutoFitMode="None"
+                                                                    HeightRequest="24"
+                                                                    HorizontalOptions="Center"
+                                                                    IsScrollBarVisible="False"
+                                                                    ItemSize="120"
+                                                                    ItemSpacing="0"
+                                                                    ItemsSource="{Binding Calories}"
+                                                                    SelectionMode="None"
+                                                                    VerticalOptions="FillAndExpand">
+
+                                                                    <listView:SfListView.ItemTemplate>
+                                                                        <DataTemplate>
+                                                                            <border:SfBorder BorderColor="{DynamicResource Gray-200}" BorderWidth="0.5">
+
+                                                                                <StackLayout
+                                                                                    HorizontalOptions="Center"
+                                                                                    Spacing="8"
+                                                                                    VerticalOptions="Center">
+
+                                                                                    <Label
+                                                                                        Margin="0"
+                                                                                        Style="{StaticResource TitleLabelStyle}"
+                                                                                        Text="{Binding Quantity}" />
+
+                                                                                    <Label
+                                                                                        FontSize="12"
+                                                                                        Style="{StaticResource TitleLabelStyle}"
+                                                                                        Text="{Binding Nutrient}"
+                                                                                        TextColor="{DynamicResource Gray-700}" />
+
+                                                                                    <BoxView
+                                                                                        BackgroundColor="{Binding Indicator}"
+                                                                                        HeightRequest="4"
+                                                                                        WidthRequest="48" />
+
+                                                                                </StackLayout>
+
+                                                                            </border:SfBorder>
+                                                                        </DataTemplate>
+                                                                    </listView:SfListView.ItemTemplate>
+
+                                                                    <listView:SfListView.Behaviors>
+                                                                        <behaviors:SfListViewExtendHeightBehavior />
+                                                                    </listView:SfListView.Behaviors>
+
+                                                                    <listView:SfListView.LayoutManager>
+                                                                        <listView:GridLayout SpanCount="3" />
+                                                                    </listView:SfListView.LayoutManager>
+
+                                                                </listView:SfListView>-->
+                                                            </border:SfBorder>
+                                                        </control:CustomShadowFrame.Content>
+
+                                                    </control:CustomShadowFrame>
+
+                                                    <border:SfBorder
+                                                        Grid.Column="1"
+                                                        Margin="0,-60,0,16"
+                                                        Padding="0"
+                                                        BackgroundColor="Transparent"
+                                                        BorderColor="{DynamicResource GrayShadowColor}"
+                                                        BorderWidth="1"
+                                                        CornerRadius="4"
+                                                        HasShadow="False"
+                                                        WidthRequest="240" />
+
+                                                </Grid>
+                                            </StackLayout>
+                                        </Grid>
+                                    </ScrollView>
+                                </Grid>
+                            </tabView:SfTabItem.Content>
+                        </tabView:SfTabItem>
+
+
+
+
+
+
+
+                        <tabView:SfTabItem Title="Приёмы пищи" SelectionColor="{DynamicResource PrimaryColor}"
+                                           TitleFontFamily="Montserrat-Regular"
+                                           TitleFontSize="14"
+                                           TitleFontColor="{DynamicResource Gray-700}"
+                                           HorizontalOptions="Center"
+                                           BackgroundColor="{StaticResource Gray-White}">
+                            
+                            <!--<tabView:SfTabItem.BindingContext>
+                                <viewModel:MealsPageViewModel/>
+                            </tabView:SfTabItem.BindingContext>-->
+
+                            <tabView:SfTabItem.Content>
+                                        <StackLayout Padding="16,16,16,36" Spacing="24" HorizontalOptions="Center">
+                                            <SearchBar x:Name="searchBar"
+                                                       TextChanged="SearchBar_TextChanged"
+                                                       Placeholder="Поиск продукта"
+                                                       FontSize="17"
+                                                       FontFamily="Montserrat-Regular"
+                                                       WidthRequest="600"
+                                                       HeightRequest="40"
+                                                       VerticalOptions="Center"/>
+
+                                            <CollectionView x:Name="searchResults"
+                                                      SelectionChanged="searchResults_ItemSelected"
+                                                      SelectionMode="Single"
+                                                      IsVisible="false">
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackLayout>
+                                                            <VisualStateManager.VisualStateGroups>
+                                                                <VisualStateGroup Name="CommonStates">                        
+                                                                    <VisualState Name="Selected">
+                                                                        <VisualState.Setters>
+                                                                            <Setter Property="BackgroundColor" Value="Pink" />
+                                                                        </VisualState.Setters>
+                                                                    </VisualState>
+                                                                </VisualStateGroup>
+                                                            </VisualStateManager.VisualStateGroups>
+                                                            <Label Text="{Binding FoodName}"
+                                                                    FontSize="16"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Start"/>
+                                                            <Label Text="{Binding Calories, StringFormat='{0:f0} kcal'}"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Center"
+                                                                    TextColor="{DynamicResource PrimaryDarkColor}"/>
+                                                        </StackLayout>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+
+                                            <buttons:SfButton
+                                                    x:Name="addNewFood"
+                                                    Margin="0,16,0,0"
+                                                    HorizontalOptions="Center"
+                                                    VerticalOptions="Center"
+                                                    Style="{StaticResource SfSquareButtonStyle}"
+                                                    Text="Добавить новый продукт"
+                                                    Clicked="Add_Clicked"
+                                                    WidthRequest="450"
+                                                    HeightRequest="37"
+                                                    FontSize="16"
+                                                    IsVisible="false"/>
+
+                                             <border:SfBorder BackgroundColor="{DynamicResource Gray-100}"
+                                                            BorderColor="{DynamicResource Gray-300}"
+                                                            BorderThickness="1"
+                                                            HeightRequest="45">
+                                                    <Label Text = "Завтрак"
+                                                           FontSize="20"
+                                                           FontFamily="Montserrat-Regular"
+                                                           TextColor="{DynamicResource Gray-700}"
+                                                           VerticalOptions="Center"
+                                                           Margin="5"/>
+                                             </border:SfBorder>
+
+                                            <CollectionView x:Name="B_FoodsList">
+                                                <!--<CollectionView.GroupHeaderTemplate>
+                                                    <DataTemplate>
+                                                            <border:SfBorder BackgroundColor="{DynamicResource Gray-100}"
+                                                                             BorderColor="{DynamicResource Gray-300}"
+                                                                             BorderThickness="1"
+                                                                             HeightRequest="45">
+                                                                <Label Text ="{Binding MealName}"
+                                                                       FontSize="20"
+                                                                       FontFamily="Montserrat-Regular"
+                                                                       TextColor="{DynamicResource Gray-700}"
+                                                                       VerticalOptions="Center"
+                                                                       Margin="10"/>
+                                                            </border:SfBorder>
+                                                    </DataTemplate>
+                                                </CollectionView.GroupHeaderTemplate>-->
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackLayout Padding="10,0,0,0" Spacing="15" Margin="5">
+                                                            <Grid RowDefinitions="20, 20" RowSpacing="10" ColumnDefinitions="120, 30">
+
+                                                                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                                                                    Text="{Binding FoodName}"
+                                                                    FontSize="17"
+                                                                    VerticalOptions="Start"
+                                                                    HorizontalOptions="Start"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                <Label Grid.Row="1" Grid.Column="0"
+                                                                    Text="{Binding Time, StringFormat='{}{0:HH\\:mm}'}"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Start"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                        
+                                                                <Label Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                                                                    Text="{Binding CaloriesConsumed, StringFormat='{0:f0} kcal'}"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Start"
+                                                                    HorizontalOptions="Start"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource PrimaryColor}"/>
+                                                                <Label Grid.Row="1" Grid.Column="3"
+                                                                    Text="{Binding Weight, StringFormat='{0} г'}"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Center"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                <Button Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                                                                    x:Name="edit_button"
+                                                                    Margin="0,0,10,0"
+                                                                    WidthRequest="45"
+                                                                    HorizontalOptions="Center"
+                                                                    VerticalOptions="Center"
+                                                                    Text="✎"
+                                                                    Clicked="EditB_Clicked"
+                                                                    BackgroundColor="Transparent"
+                                                                    FontSize="20"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                <Button Grid.Column="5" Grid.RowSpan="2"
+                                                                       x:Name="delete_button"
+                                                                       Margin="0,0,10,0"
+                                                                       WidthRequest="50"
+                                                                       HorizontalOptions="Center"
+                                                                       VerticalOptions="Center"
+                                                                       Text="╳"
+                                                                       Clicked="DeleteB_Clicked"
+                                                                       BackgroundColor="Transparent"
+                                                                       FontSize="18"
+                                                                       FontFamily="Montserrat-Regular"
+                                                                       TextColor="{DynamicResource Gray-700}"/>
+                                                                    </Grid>
+                                                                </StackLayout>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+
+
+
+                                            <border:SfBorder BackgroundColor="{DynamicResource Gray-100}"
+                                                                             BorderColor="{DynamicResource Gray-300}"
+                                                                             BorderThickness="1"
+                                                                             HeightRequest="45">
+                                                    <Label Text = "Второй завтрак"
+                                                           FontSize="20"
+                                                           FontFamily="Montserrat-Regular"
+                                                           TextColor="{DynamicResource Gray-700}"
+                                                           VerticalOptions="Center"
+                                                           Margin="5"/>
+                                             </border:SfBorder>
+
+                                            <CollectionView x:Name="Sb_FoodsList">
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                            <StackLayout Padding="10,0,0,0" Spacing="15" Margin="5">
+                                                            <Grid RowDefinitions="20, 20" RowSpacing="10" ColumnDefinitions="120, 30">
+
+                                                                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                                                                    Text="{Binding FoodName}"
+                                                                    FontSize="17"
+                                                                    VerticalOptions="Start"
+                                                                    HorizontalOptions="Start"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                <Label Grid.Row="1" Grid.Column="0"
+                                                                    Text="{Binding Time, StringFormat='{}{0:HH\\:mm}'}"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Start"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                        
+                                                                <Label Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                                                                    Text="{Binding CaloriesConsumed, StringFormat='{0:f0} kcal'}"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Start"
+                                                                    HorizontalOptions="Start"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource PrimaryColor}"/>
+                                                                <Label Grid.Row="1" Grid.Column="3"
+                                                                    Text="{Binding Weight, StringFormat='{0} г'}"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Center"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                <Button Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                                                                    x:Name="edit_button"
+                                                                    Margin="0,0,10,0"
+                                                                    WidthRequest="45"
+                                                                    HorizontalOptions="Center"
+                                                                    VerticalOptions="Center"
+                                                                    Text="✎"
+                                                                    Clicked="EditSb_Clicked"
+                                                                    BackgroundColor="Transparent"
+                                                                    FontSize="20"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                <Button Grid.Column="5" Grid.RowSpan="2"
+                                                                       x:Name="delete_button"
+                                                                       Margin="0,0,10,0"
+                                                                       WidthRequest="50"
+                                                                       HorizontalOptions="Center"
+                                                                       VerticalOptions="Center"
+                                                                       Text="╳"
+                                                                       Clicked="DeleteSb_Clicked"
+                                                                       BackgroundColor="Transparent"
+                                                                       FontSize="18"
+                                                                       FontFamily="Montserrat-Regular"
+                                                                       TextColor="{DynamicResource Gray-700}"/>
+                                                                    </Grid>
+                                                                </StackLayout>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+
+
+                                            <border:SfBorder BackgroundColor="{DynamicResource Gray-100}"
+                                                        BorderColor="{DynamicResource Gray-300}"
+                                                        BorderThickness="1"
+                                                        HeightRequest="45">
+                                                    <Label Text = "Обед"
+                                                           FontSize="20"
+                                                           FontFamily="Montserrat-Regular"
+                                                           TextColor="{DynamicResource Gray-700}"
+                                                           VerticalOptions="Center"
+                                                           Margin="5"/>
+                                             </border:SfBorder>
+
+                                            <CollectionView x:Name="D_FoodsList">
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                            <StackLayout Padding="10,0,0,0" Spacing="15" Margin="5">
+                                                            <Grid RowDefinitions="20, 20" RowSpacing="10" ColumnDefinitions="120, 30">
+
+                                                                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                                                                    Text="{Binding FoodName}"
+                                                                    FontSize="17"
+                                                                    VerticalOptions="Start"
+                                                                    HorizontalOptions="Start"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                <Label Grid.Row="1" Grid.Column="0"
+                                                                    Text="{Binding Time, StringFormat='{}{0:HH\\:mm}'}"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Start"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                        
+                                                                <Label Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                                                                    Text="{Binding CaloriesConsumed, StringFormat='{0:f0} kcal'}"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Start"
+                                                                    HorizontalOptions="Start"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource PrimaryColor}"/>
+                                                                <Label Grid.Row="1" Grid.Column="3"
+                                                                    Text="{Binding Weight, StringFormat='{0} г'}"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Center"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                <Button Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                                                                    x:Name="edit_button"
+                                                                    Margin="0,0,10,0"
+                                                                    WidthRequest="45"
+                                                                    HorizontalOptions="Center"
+                                                                    VerticalOptions="Center"
+                                                                    Text="✎"
+                                                                    Clicked="EditD_Clicked"
+                                                                    BackgroundColor="Transparent"
+                                                                    FontSize="20"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                <Button Grid.Column="5" Grid.RowSpan="2"
+                                                                       x:Name="delete_button"
+                                                                       Margin="0,0,10,0"
+                                                                       WidthRequest="50"
+                                                                       HorizontalOptions="Center"
+                                                                       VerticalOptions="Center"
+                                                                       Text="╳"
+                                                                       Clicked="DeleteD_Clicked"
+                                                                       BackgroundColor="Transparent"
+                                                                       FontSize="18"
+                                                                       FontFamily="Montserrat-Regular"
+                                                                       TextColor="{DynamicResource Gray-700}"/>
+                                                                    </Grid>
+                                                                </StackLayout>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+
+
+                                            <border:SfBorder BackgroundColor="{DynamicResource Gray-100}"
+                                                                             BorderColor="{DynamicResource Gray-300}"
+                                                                             BorderThickness="1"
+                                                                             HeightRequest="45">
+                                                    <Label Text = "Второй обед"
+                                                           FontSize="20"
+                                                           FontFamily="Montserrat-Regular"
+                                                           TextColor="{DynamicResource Gray-700}"
+                                                           VerticalOptions="Center"
+                                                           Margin="5"/>
+                                             </border:SfBorder>
+                                            <CollectionView x:Name="Sd_FoodsList">
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                            <StackLayout Padding="10,0,0,0" Spacing="15" Margin="5">
+                                                            <Grid RowDefinitions="20, 20" RowSpacing="10" ColumnDefinitions="120, 30">
+
+                                                                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                                                                    Text="{Binding FoodName}"
+                                                                    FontSize="17"
+                                                                    VerticalOptions="Start"
+                                                                    HorizontalOptions="Start"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                <Label Grid.Row="1" Grid.Column="0"
+                                                                    Text="{Binding Time, StringFormat='{}{0:HH\\:mm}'}"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Start"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                        
+                                                                <Label Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                                                                    Text="{Binding CaloriesConsumed, StringFormat='{0:f0} kcal'}"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Start"
+                                                                    HorizontalOptions="Start"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource PrimaryColor}"/>
+                                                                <Label Grid.Row="1" Grid.Column="3"
+                                                                    Text="{Binding Weight, StringFormat='{0} г'}"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Center"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                <Button Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                                                                    x:Name="edit_button"
+                                                                    Margin="0,0,10,0"
+                                                                    WidthRequest="45"
+                                                                    HorizontalOptions="Center"
+                                                                    VerticalOptions="Center"
+                                                                    Text="✎"
+                                                                    Clicked="EditSd_Clicked"
+                                                                    BackgroundColor="Transparent"
+                                                                    FontSize="20"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                <Button Grid.Column="5" Grid.RowSpan="2"
+                                                                       x:Name="delete_button"
+                                                                       Margin="0,0,10,0"
+                                                                       WidthRequest="50"
+                                                                       HorizontalOptions="Center"
+                                                                       VerticalOptions="Center"
+                                                                       Text="╳"
+                                                                       Clicked="DeleteSd_Clicked"
+                                                                       BackgroundColor="Transparent"
+                                                                       FontSize="18"
+                                                                       FontFamily="Montserrat-Regular"
+                                                                       TextColor="{DynamicResource Gray-700}"/>
+                                                                    </Grid>
+                                                                </StackLayout>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+
+
+                                            <border:SfBorder BackgroundColor="{DynamicResource Gray-100}"
+                                                                             BorderColor="{DynamicResource Gray-300}"
+                                                                             BorderThickness="1"
+                                                                             HeightRequest="45">
+                                                    <Label Text = "Ужин"
+                                                           FontSize="20"
+                                                           FontFamily="Montserrat-Regular"
+                                                           TextColor="{DynamicResource Gray-700}"
+                                                           VerticalOptions="Center"
+                                                           Margin="5"/>
+                                             </border:SfBorder>
+                                            <CollectionView x:Name="E_FoodsList">
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                           <StackLayout Padding="10,0,0,0" Spacing="15" Margin="5">
+                                                            <Grid RowDefinitions="20, 20" RowSpacing="10" ColumnDefinitions="120, 30">
+
+                                                                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                                                                    Text="{Binding FoodName}"
+                                                                    FontSize="17"
+                                                                    VerticalOptions="Start"
+                                                                    HorizontalOptions="Start"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                <Label Grid.Row="1" Grid.Column="0"
+                                                                    Text="{Binding Time, StringFormat='{}{0:HH\\:mm}'}"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Start"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                        
+                                                                <Label Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                                                                    Text="{Binding CaloriesConsumed, StringFormat='{0:f0} kcal'}"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Start"
+                                                                    HorizontalOptions="Start"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource PrimaryColor}"/>
+                                                                <Label Grid.Row="1" Grid.Column="3"
+                                                                    Text="{Binding Weight, StringFormat='{0} г'}"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Center"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                <Button Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                                                                    x:Name="edit_button"
+                                                                    Margin="0,0,10,0"
+                                                                    WidthRequest="45"
+                                                                    HorizontalOptions="Center"
+                                                                    VerticalOptions="Center"
+                                                                    Text="✎"
+                                                                    Clicked="EditE_Clicked"
+                                                                    BackgroundColor="Transparent"
+                                                                    FontSize="20"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                <Button Grid.Column="5" Grid.RowSpan="2"
+                                                                       x:Name="delete_button"
+                                                                       Margin="0,0,10,0"
+                                                                       WidthRequest="50"
+                                                                       HorizontalOptions="Center"
+                                                                       VerticalOptions="Center"
+                                                                       Text="╳"
+                                                                       Clicked="DeleteE_Clicked"
+                                                                       BackgroundColor="Transparent"
+                                                                       FontSize="18"
+                                                                       FontFamily="Montserrat-Regular"
+                                                                       TextColor="{DynamicResource Gray-700}"/>
+                                                                    </Grid>
+                                                                </StackLayout>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+
+
+                                            <border:SfBorder BackgroundColor="{DynamicResource Gray-100}"
+                                                                             BorderColor="{DynamicResource Gray-300}"
+                                                                             BorderThickness="1"
+                                                                             HeightRequest="45">
+                                                    <Label Text = "Второй ужин"
+                                                           FontSize="20"
+                                                           FontFamily="Montserrat-Regular"
+                                                           TextColor="{DynamicResource Gray-700}"
+                                                           VerticalOptions="Center"
+                                                           Margin="5"/>
+                                             </border:SfBorder>
+                                            <CollectionView x:Name="Se_FoodsList">
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                           <StackLayout Padding="10,0,0,0" Spacing="15" Margin="5">
+                                                            <Grid RowDefinitions="20, 20" RowSpacing="10" ColumnDefinitions="120, 30">
+
+                                                                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                                                                    Text="{Binding FoodName}"
+                                                                    FontSize="17"
+                                                                    VerticalOptions="Start"
+                                                                    HorizontalOptions="Start"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                <Label Grid.Row="1" Grid.Column="0"
+                                                                    Text="{Binding Time, StringFormat='{}{0:HH\\:mm}'}"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Start"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                        
+                                                                <Label Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                                                                    Text="{Binding CaloriesConsumed, StringFormat='{0:f0} kcal'}"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Start"
+                                                                    HorizontalOptions="Start"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource PrimaryColor}"/>
+                                                                <Label Grid.Row="1" Grid.Column="3"
+                                                                    Text="{Binding Weight, StringFormat='{0} г'}"
+                                                                    FontSize="14"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Center"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                <Button Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                                                                    x:Name="edit_button"
+                                                                    Margin="0,0,10,0"
+                                                                    WidthRequest="45"
+                                                                    HorizontalOptions="Center"
+                                                                    VerticalOptions="Center"
+                                                                    Text="✎"
+                                                                    Clicked="EditSe_Clicked"
+                                                                    BackgroundColor="Transparent"
+                                                                    FontSize="20"
+                                                                    FontFamily="Montserrat-Regular"
+                                                                    TextColor="{DynamicResource Gray-700}"/>
+                                                                <Button Grid.Column="5" Grid.RowSpan="2"
+                                                                       x:Name="delete_button"
+                                                                       Margin="0,0,10,0"
+                                                                       WidthRequest="50"
+                                                                       HorizontalOptions="Center"
+                                                                       VerticalOptions="Center"
+                                                                       Text="╳"
+                                                                       Clicked="DeleteSe_Clicked"
+                                                                       BackgroundColor="Transparent"
+                                                                       FontSize="18"
+                                                                       FontFamily="Montserrat-Regular"
+                                                                       TextColor="{DynamicResource Gray-700}"/>
+                                                                    </Grid>
+                                                                </StackLayout>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                        </StackLayout>
+                            </tabView:SfTabItem.Content>
+                        </tabView:SfTabItem>
+
+                    </tabView:SfTabView>
+                
+                
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

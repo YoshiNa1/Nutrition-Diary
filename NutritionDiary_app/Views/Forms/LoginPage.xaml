@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NutritionDiary_app.Views.Forms.LoginPage"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:tabView="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+             xmlns:converter="clr-namespace:NutritionDiary_app.Converters"
+             xmlns:viewModel="clr-namespace:NutritionDiary_app.ViewModels.Forms"
+             xmlns:control="clr-namespace:NutritionDiary_app.Controls"
+             x:Name="LoginForm"
+             Title="Login Form"
+             BackgroundColor="{DynamicResource Gray-200}"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:StringToBooleanConverter x:Key="StringToBooleanConverter" />
+            <converter:ErrorValidationColorConverter x:Key="ErrorValidationColorConverter" />
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converter:NameValidationConverter x:Key="FirstValidationErrorConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+         <viewModel:LoginViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <ScrollView Padding="0,16">
+            <ScrollView.HorizontalOptions>
+                <OnIdiom
+                    x:TypeArguments="LayoutOptions"
+                    Default="Center"
+                    Phone="FillAndExpand" />
+            </ScrollView.HorizontalOptions>
+            <ScrollView.VerticalOptions>
+                <OnIdiom
+                    x:TypeArguments="LayoutOptions"
+                    Default="CenterAndExpand"
+                    Phone="FillAndExpand" />
+            </ScrollView.VerticalOptions>
+            <StackLayout>
+                <StackLayout.BindingContext>
+                    <viewModel:LoginViewModel/>
+                </StackLayout.BindingContext>
+                <control:CustomShadowFrame Margin="24,8" Padding="0">
+                    <tabView:SfTabView VisibleHeaderCount="1" >
+                        <tabView:SfTabView.SelectionIndicatorSettings>
+                            <tabView:SelectionIndicatorSettings Color="{DynamicResource PrimaryColor}"
+                                                            StrokeThickness="3"/>
+
+                        </tabView:SfTabView.SelectionIndicatorSettings>
+                        <tabView:SfTabItem Title="Login" SelectionColor="{DynamicResource PrimaryColor}" 
+                                           TitleFontFamily="{StaticResource Montserrat-Regular}"
+                                           TitleFontSize="14"
+                                           TitleFontColor="{DynamicResource Gray-700}">
+                            <tabView:SfTabItem.BindingContext>
+                                <viewModel:LoginViewModel/>
+                            </tabView:SfTabItem.BindingContext>
+                            <tabView:SfTabItem.Content>
+                                <Grid VerticalOptions="Center">
+                                    <StackLayout Padding="16" HorizontalOptions="Center" 
+                                             VerticalOptions="Center">
+
+                                        <!--<local:SimpleEmailEntry Padding="0,24" />-->
+
+
+                                        <!--SimpleEmailEntry here!!-->
+                                        <!--Email-->
+                                        <border:SfBorder
+                                            BackgroundColor="{DynamicResource Gray-White}"
+                                            BorderColor="{Binding Path=IsFocused, Source={x:Reference EmailEntryForLogin}, Converter= {StaticResource ErrorValidationColorConverter}, ConverterParameter={x:Reference EmailEntryForLogin}}"
+                                            Style="{StaticResource SfBorderStyle}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <control:BorderlessEntry
+                                                    x:Name="EmailEntryForLogin"
+                                                    Placeholder="Email" Keyboard="Email"
+                                                    PlaceholderColor="{DynamicResource Gray-700}"
+                                                    Style="{StaticResource EntryStyle}"
+                                                    Text="{Binding Email}"
+                                                    TextColor="{DynamicResource Gray-900}" />
+
+                                                <Label
+                                                    Margin="15,0"
+                                                    FontFamily="{StaticResource FontIcons}"
+                                                    FontSize="18"
+                                                    HorizontalOptions="EndAndExpand"
+                                                    HorizontalTextAlignment="End"
+                                                    IsVisible="{Binding Path=IsVisible, Source={x:Reference ValidationLabel}}"
+                                                    Text="&#xe707;"
+                                                    TextColor="{DynamicResource Red}"
+                                                    VerticalOptions="Center" />
+                                            </Grid>
+                                        </border:SfBorder>
+
+                                        <Label
+                                            x:Name="ValidationLabel"
+                                            Margin="15,-5,0,0"
+                                            FontSize="12"
+                                            IsVisible="{Binding Path=IsFocused, Source={x:Reference EmailEntryForLogin}, Converter={StaticResource StringToBooleanConverter}, ConverterParameter={x:Reference EmailEntryForLogin}}"
+                                            Text="Пожалуйста, введите корректный email!"
+                                            TextColor="{DynamicResource Red}"
+                                            VerticalOptions="FillAndExpand" />
+
+                                        <!--  Entry to get password from user  -->
+                                        <border:SfBorder
+                                        BackgroundColor="{DynamicResource Gray-White}"
+                                        BorderColor="{Binding Source={x:Reference PasswordEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                        Style="{StaticResource SfBorderStyle}">
+                                                <control:BorderlessEntry
+                                        x:Name="PasswordEntry"
+                                        IsPassword="True"
+                                        Placeholder="Пароль"
+                                        PlaceholderColor="{DynamicResource Gray-700}"
+                                        Style="{StaticResource EntryStyle}"
+                                        Text="{Binding Password}"
+                                        TextColor="{DynamicResource Gray-900}" />
+                                        </border:SfBorder>
+
+                                        
+                                        <!--Register-->
+                                        <StackLayout
+                                            HorizontalOptions="Center"
+                                            Orientation="Horizontal"
+                                            Spacing="1"
+                                            VerticalOptions="End">
+
+
+                                            <Label
+                                                Style="{StaticResource DescriptionLabelStyle}"
+                                                Text="Ещё не зарегистрирован?"
+                                                TextColor="{DynamicResource Gray-White}"
+                                                VerticalTextAlignment="Center" />
+
+                                            <!--  Sign-up button  -->
+                                            <buttons:SfButton
+                                                Clicked="Register_Clicked"
+                                                Style="{StaticResource TransparentButtonStyle}"
+                                                Text="Зарегистрироваться"
+                                                TextColor="{DynamicResource PrimaryColor}" />
+
+                                        </StackLayout>
+
+                                        <!--<Label Grid.Row="6"
+                                            Margin="0,20,0,0"
+                                            FontFamily="Montserrat-Medium"
+                                            HorizontalTextAlignment="Center"
+                                            Style="{StaticResource LabelStyle}"
+                                            Text="Ещё не зарегистрирован?"
+                                            TextColor="{DynamicResource Gray-800}" />
+
+                                          Register  
+                                        <buttons:SfButton
+                                            HorizontalOptions="Center"
+                                                Margin="0,16,0,16"
+                                                Clicked="Register_Clicked"
+                                                CornerRadius="20"
+                                                HeightRequest="40"
+                                                WidthRequest="325">
+                                            <buttons:SfButton.Content>
+                                                <StackLayout
+                                                        HorizontalOptions="CenterAndExpand"
+                                                        Orientation="Horizontal"
+                                                        VerticalOptions="Center">
+                                                    <Label
+                                                            FontFamily="FontIcons"
+                                                            FontSize="18"
+                                                            Text="&#xe735;"
+                                                            TextColor="{DynamicResource Gray-White}"
+                                                            VerticalTextAlignment="Center" />
+                                                    <Label
+                                                            FontFamily="Montserrat-Medium"
+                                                            FontSize="16"
+                                                            Text="Зарегистрироваться"
+                                                            TextColor="{DynamicResource Gray-White}" />
+                                                </StackLayout>
+                                            </buttons:SfButton.Content>
+                                        </buttons:SfButton>-->
+
+                                        <!--  Login button  -->
+                                        <buttons:SfButton
+                                            HorizontalOptions="Center"
+                                            WidthRequest="245"
+                                            Margin="0,16"
+                                            Style="{StaticResource SfButtonStyle}"
+                                            Clicked="Login_Clicked"
+                                            Command="{Binding LoginCommand}"
+                                            Text="ВОЙТИ" />
+
+
+
+                                    </StackLayout>
+                                </Grid>
+                            </tabView:SfTabItem.Content>
+                        </tabView:SfTabItem>
+                        </tabView:SfTabView>
+                    </control:CustomShadowFrame>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
